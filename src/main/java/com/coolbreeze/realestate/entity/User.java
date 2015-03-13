@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
@@ -17,8 +18,11 @@ public class User implements Serializable {
 	@GeneratedValue
 	private int userId;
 	
+	
 	private String userName;
+	
 	private String password;
+	
 	private String email;
 	
 	@ManyToMany
@@ -27,6 +31,7 @@ public class User implements Serializable {
 	
 	@OneToMany(mappedBy ="user")
 	private List<Property> properties;
+	
 	
 	public List<Role> getRoles() {
 		return roles;
@@ -58,6 +63,12 @@ public class User implements Serializable {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
+	public List<Property> getProperties() {
+		return properties;
+	}
+	public void setProperties(List<Property> properties) {
+		this.properties = properties;
+	}
+	
 
 }

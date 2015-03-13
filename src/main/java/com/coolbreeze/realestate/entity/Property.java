@@ -91,6 +91,14 @@ public class Property implements Serializable {
 	public void setZip(String zip) {
 		this.zip = zip;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
 	
 
