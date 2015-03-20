@@ -48,11 +48,16 @@
 			<ul class="nav navbar-nav">
 				<li class="active"><a href='<spring:url value="/"/>'>Home</a></li>
 				<security:authorize access="hasRole('ROLE_ADMIN')">
-					<li><a href='<spring:url value="/admin.html"/>'>Admin Panel</a></li>
+					<li><a href='<spring:url value="/admin.html"/>'>Admin
+							Panel</a></li>
 				</security:authorize>
 				<security:authorize access="! isAuthenticated()">
 					<li><a href='<spring:url value="/register.html"/>'>Register</a></li>
 					<li><a href='<spring:url value="/login.html"/>'>Login</a></li>
+				</security:authorize>
+				<security:authorize access="hasAnyRole('ROLE_BUYER', 'ROLE_SELLER')">
+					<li><a href='<spring:url value="/account.html"/>'>My
+							Account</a></li>
 				</security:authorize>
 				<security:authorize access="isAuthenticated()">
 					<li><a href='<spring:url value="/logout"/>'>Logout</a></li>

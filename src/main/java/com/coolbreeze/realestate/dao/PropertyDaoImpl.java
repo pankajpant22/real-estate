@@ -55,4 +55,12 @@ public class PropertyDaoImpl implements PropertyDao {
 		return propertyList;
 	}
 
+	@Override
+	public void delete(int id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createQuery("delete Property where id = :id");
+		query.setParameter("id", id);
+		int result = query.executeUpdate();
+	}
+
 }

@@ -25,6 +25,8 @@ public class User implements Serializable {
 	
 	private String email;
 	
+	private boolean enabled;
+	
 	@ManyToMany
 	@JoinTable
 	private List<Role> roles;
@@ -33,6 +35,13 @@ public class User implements Serializable {
 	private List<Property> properties;
 	
 	
+	
+	public boolean getEnabled() {
+		return enabled;
+	}
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 	public List<Role> getRoles() {
 		return roles;
 	}

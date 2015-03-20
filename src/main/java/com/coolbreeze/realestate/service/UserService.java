@@ -2,6 +2,8 @@ package com.coolbreeze.realestate.service;
 
 import java.util.List;
 
+
+
 //import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -49,5 +51,20 @@ public class UserService {
 	@Transactional   
 	public void save(User user) {
 		userDao.addUser(user);
+	}
+
+	@Transactional
+	public User findOneWithProperty(String name) {
+		User user = findOne(name);
+		return findOneWithProperty(user.getUserId());
+	}
+
+	@Transactional
+	private User findOne(String name) {
+		return userDao.findOne(name);
+	}
+
+	public void delete(int userId) {
+		userDao.delete(userId);
 	}
 }

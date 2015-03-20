@@ -48,4 +48,9 @@ public class PropertyService {
 	public void save(Property property) {
 		propertyDao.addProperty(property);
 	}
+
+	@Transactional
+	public void delete(int id) {
+		propertyDao.delete(id);
+	}
 }
