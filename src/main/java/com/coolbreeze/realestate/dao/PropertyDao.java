@@ -13,4 +13,5 @@ public interface PropertyDao {
     public Property findOne(int id);
     public List<Property> findByUserId(int userId);
 	public void delete(int id);
+	
 }

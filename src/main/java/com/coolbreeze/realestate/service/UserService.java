@@ -60,7 +60,7 @@ public class UserService {
 	}
 
 	@Transactional
-	private User findOne(String name) {
+	public User findOne(String name) {
 		return userDao.findOne(name);
 	}
 

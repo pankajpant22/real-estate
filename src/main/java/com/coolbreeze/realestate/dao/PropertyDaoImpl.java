@@ -62,5 +62,6 @@ public class PropertyDaoImpl implements PropertyDao {
 		query.setParameter("id", id);
 		int result = query.executeUpdate();
 	}
+	
 
 }

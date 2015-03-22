@@ -13,35 +13,40 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <title>real estate web application</title>
-<link
-	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
-	rel="stylesheet">
+<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 <link href="css/font-awesome.css" rel="stylesheet">
 <link href="css/simple-line-icons.css" rel="stylesheet">
 <link href="css/fullscreen-slider.css" rel="stylesheet">
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/app.css" rel="stylesheet" id="app">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/bootstrap.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"/>
 
 
 <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+<script type="text/javascript">
+		$(document).ready(function() {
+			$('.triggerRemoveUser').click(function(e) {
+				e.preventDefault();
+				$("#userRemove .removeBtn").attr("href", $(this).attr("href"));
+				$('#userRemove').modal();
+			});
+			
+			$('.propertyRemoveTrigger').click(function(e){
+				e.preventDefault();
+				$("#propertyRemove .removeBtn").attr("href", $(this).attr("href"));
+				$('#propertyRemove').modal();
+			});
+
+		});
+</script>
+
 
 </head>
 <body class="notransition no-hidden">
@@ -92,9 +97,9 @@
 			<!-- Nav tabs -->
 			<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation" class="active"><a href="#home"
-					aria-controls="home" role="tab" data-toggle="tab">Users</a></li>
+					aria-controls="home" role="tab" data-toggle="tab" style="font-weight:bold; margin:15px;">Users</a></li>
 				<li role="presentation"><a href="#profile"
-					aria-controls="profile" role="tab" data-toggle="tab">Properties</a></li>
+					aria-controls="profile" role="tab" data-toggle="tab" style="font-weight:bold; margin:15px;">Properties</a></li>
 			</ul>
 
 			<!-- Tab panes -->
@@ -112,15 +117,18 @@
 						<tbody>
 							<c:forEach items="${userList}" var="user">
 								<tr id="tr_id_1" class="tr-class-1">
-									<td id="td_id_1" class="td-class-1">${user.userName}</td>
+									<td id="td_id_1" class="td-class-1">
+										<c:out value="${user.userName}" />
+									</td>
 									<td><a
-										href='<spring:url value="/users/${user.userId}.html"/>'>${user.email}</a>
+										href='<spring:url value="/users/${user.userId}.html"/>'>
+										<c:out value = "${user.email}" />
+										</a>
 									</td>
 									<td>${user.password}</td>
 									<td><a
-										href='<spring:url value="/admin/user/delete/${user.userId}.html"/>' 
-										class = "btn btn-danger">Remove</a>
-									</td>
+										href='<spring:url value="/admin/user/delete/${user.userId}.html"/>'
+										class="btn btn-danger triggerRemoveUser">Remove</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -150,9 +158,8 @@
 									<td>${prop.zip}</td>
 									<td>${prop.publishedDate}</td>
 									<td><a
-										href='<spring:url value="/admin/property/delete/${prop.id}.html"/>' 
-										class = "btn btn-danger">Remove</a>
-									</td>
+										href='<spring:url value="/admin/property/delete/${prop.id}.html"/>'
+										class="btn btn-danger propertyRemoveTrigger">Remove</a></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -163,6 +170,48 @@
 			</div>
 		</div>
 	</div>
+	<!-- Modal -->
+	<div class="modal fade" id="userRemove" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Delete User</h4>
+				</div>
+				<div class="modal-body">Are You Sure ?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<a href="" class="btn btn-danger removeBtn">Delete</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- Modal -->
+	<div class="modal fade" id="propertyRemove" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel">Delete Property</h4>
+				</div>
+				<div class="modal-body">Are You Sure ?</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+					<a href="" class="btn btn-danger removeBtn">Delete</a>
+				</div>
+			</div>
+		</div>
+	</div>
+
 
 	<!-- Footer -->
 
@@ -218,13 +267,11 @@
 	<script src="js/jquery.placeholder.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/jquery.touchSwipe.min.js"></script>
-	<script
-		src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=geometry&amp;libraries=places"
+	<script src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=geometry&amp;libraries=places"
 		type="text/javascript"></script>
 	<script src="js/infobox.js"></script>
 	<script src="js/jquery.visible.js"></script>
 	<script src="js/home.js" type="text/javascript"></script>
-
 
 </body>
 </html>

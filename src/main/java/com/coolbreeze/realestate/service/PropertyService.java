@@ -2,6 +2,9 @@ package com.coolbreeze.realestate.service;
 
 import java.util.List;
 
+
+import org.hibernate.Query;
+import org.hibernate.Session;
 //import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -53,4 +56,6 @@ public class PropertyService {
 	public void delete(int id) {
 		propertyDao.delete(id);
 	}
+	
+	
 }

@@ -138,7 +138,6 @@
 </div>
 
 <!-- Content -->
-
 <div class="home-wrapper">
 <div class="home-content">
 <h2 class="osLight">Recently Listed Properties</h2>

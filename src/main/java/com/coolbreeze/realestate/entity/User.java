@@ -3,14 +3,22 @@ package com.coolbreeze.realestate.entity;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+
+import com.coolbreeze.realestate.annotation.UniqueUsername;
+
+
+
 
 @Entity
 public class User implements Serializable {
@@ -18,7 +26,8 @@ public class User implements Serializable {
 	@GeneratedValue
 	private int userId;
 	
-	
+	@Column(name = "userName",unique=true)
+//	@UniqueUsername(message = "Such User Name already Exists")
 	private String userName;
 	
 	private String password;

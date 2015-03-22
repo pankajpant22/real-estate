@@ -3,12 +3,14 @@ package com.coolbreeze.realestate.entity;
 import java.io.Serializable;
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.ManyToAny;
 
@@ -24,6 +26,7 @@ public class Property implements Serializable {
 	private String Address;
 	
 	private String city;
+	
 	
 	private int price;
 	
