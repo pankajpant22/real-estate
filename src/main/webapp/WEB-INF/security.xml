@@ -13,6 +13,8 @@
 		<intercept-url pattern="/users/**" access="hasRole('ROLE_ADMIN')" />
 		<intercept-url pattern="/account**"
 			access="hasAnyRole('ROLE_BUYER', 'ROLE_SELLER')" />
+		<intercept-url pattern="/property/contactAgent/**"
+			access="hasAnyRole('ROLE_BUYER', 'ROLE_SELLER')" />
 		<form-login login-page="/login.html" />
 		<logout logout-url="/logout" />
 	</http>

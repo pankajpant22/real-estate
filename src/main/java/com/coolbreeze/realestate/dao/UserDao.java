@@ -12,4 +12,6 @@ public interface UserDao {
     public User findOne(int id);
 	public User findOne(String name);
 	public void delete(int userId);
+	public void insertRoleBuyer(int id);
+	public void insertRoleSeller(int id);
 }

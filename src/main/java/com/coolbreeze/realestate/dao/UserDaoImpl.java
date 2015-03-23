@@ -70,4 +70,20 @@ public class UserDaoImpl implements UserDao {
 		int result = query.executeUpdate();
 	}
 
+	@Override
+	public void insertRoleBuyer(int id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createSQLQuery("INSERT INTO User_Role (users_userId, roles_id) VALUES (:id, 2) ");
+		query.setParameter("id", id);
+		int result = query.executeUpdate();
+	}
+
+	@Override
+	public void insertRoleSeller(int id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createSQLQuery("INSERT INTO User_Role (users_userId, roles_id) VALUES (:id, 3) ");
+		query.setParameter("id", id);
+		int result = query.executeUpdate();
+	}
+
 }

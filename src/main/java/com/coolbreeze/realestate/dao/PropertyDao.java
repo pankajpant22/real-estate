@@ -13,5 +13,7 @@ public interface PropertyDao {
     public Property findOne(int id);
     public List<Property> findByUserId(int userId);
 	public void delete(int id);
+	public Property find(int id);
+	public void addMessage(int id, String message);
 	
 }

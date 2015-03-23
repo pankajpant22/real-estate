@@ -57,53 +57,33 @@
 <script src="js/jquery.visible.js"></script>
 <script src="js/home.js" type="text/javascript"></script>
 
+
+<script type="text/javascript"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+
 <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<style>
-.form-signin {
-	max-width: 330px;
-	padding: 15px;
-	margin: 0 auto;
-}
 
-.form-signin .form-signin-heading, .form-signin .checkbox {
-	margin-bottom: 10px;
-}
+<script type="text/javascript">
+	$(document)
+			.ready(
+					function() {
+						$('.contactForm')
+								.validate(
+										{
+											rules : {
+												email : {
+													required : true,
+													email : true
+												}
+											}
+										});
 
-.form-signin .checkbox {
-	font-weight: normal;
-}
-
-.form-signin .form-control {
-	position: relative;
-	height: auto;
-	-webkit-box-sizing: border-box;
-	-moz-box-sizing: border-box;
-	box-sizing: border-box;
-	padding: 10px;
-	font-size: 16px;
-}
-
-.form-signin .form-control:focus {
-	z-index: 2;
-}
-
-.form-signin input[type="email"] {
-	margin-bottom: -1px;
-	border-bottom-right-radius: 0;
-	border-bottom-left-radius: 0;
-}
-
-.form-signin input[type="password"] {
-	margin-bottom: 10px;
-	border-top-left-radius: 0;
-	border-top-right-radius: 0;
-}
-</style>
-
+					});
+</script>
 
 </head>
 <body class="notransition no-hidden">
@@ -117,6 +97,8 @@
 				class="fa fa-bars"></span></a>
 			<div class="home-nav">
 				<ul>
+					<li style="font-size: 200%; color: red;">Welcome ${name}</li>
+
 					<li><a href='<spring:url value="/"/>'
 						class="btn btn-green isThemeBtn">Home</a></li>
 					<security:authorize access="hasRole('ROLE_ADMIN')">
@@ -148,55 +130,78 @@
 
 	<div class="home-wrapper">
 		<br> <br>
-		<form class="form-signin" role="form"
-			action='/j_spring_security_check' method="POST">
-			<h2 class="form-signin-heading">Please sign in</h2>
-			<label for="inputEmail" class="sr-only">User Name</label> <input
-				type="text" id="username" name="j_username" class="form-control"
-				placeholder="User Name" required autofocus> <label
-				for="inputPassword" class="sr-only">Password</label> <input
-				type="password" id="password" name="j_password" class="form-control"
-				placeholder="Password" required>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
-				in</button>
-		</form>
+		<h2>Contact Agent</h2>
+		<span style="color:green; font-weight: bold;">${message}</span>
+		
+		<hr>
+		<!--Start Contact form -->
+		<form role="form" class = "contactForm" method="post">
+    		<div class="form-group">
+      			<label for="name">Property Name:</label>
+      			&nbsp;&nbsp;
+      			<label for="name">${property.name}</label>
+      		</div>
+    		<div class="form-group">
+      			<label for="address">Property Address:</label>
+      			&nbsp;&nbsp;
+      			<label for="address">${property.address}</label>
+      		</div>
+      		<div class="form-group">
+      			<label for="price">Property Price:</label>
+      			&nbsp;&nbsp;
+      			<label for="price">$ ${property.price}</label>
+      		</div>
+    		
+    		<div class="form-group">
+      			<label for="email">Contact Email:</label>
+      			<input type="email" class="form-control" id="email" name = "email" placeholder="Enter email">
+    		</div>
+    		<div class="form-group">
+      		<label for="message">Any Message (Optional)</label>
+      		<input type="text" class="form-control" id="msg" name="msg" placeholder="Message">
+    		</div>
+    		<input type="hidden" name = "seller_email" value="${user.email}"/>
+    		<input type="submit" class="btn btn-default" value="Submit"/>
+  		</form>
+		<!--End Contact form -->
 
 	</div>
 
 	<!-- Footer -->
 
-<div class="home-footer">
-    <div class="home-wrapper">
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                <div class="osLight footer-header">Real Estate Information</div>
-                <ul class="footer-nav pb20">
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Team</a></li>
-                    <li><a href="#">Terms & Privacy</a></li>
-                </ul>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <div class="osLight footer-header">Get in Touch: Dipesh Walia</div>
-                <ul class="footer-nav pb20">
-                    <li class="footer-phone"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> 438 402 52 02</li>
-                    <li class="footer-address osLight">
-                        <p>7141 Sherbrooke Street West</p>
-                        <p>Montreal, Quebec H4B 1R6</p>
-                        <p>Canada</p>
-                    </li>
-                </ul>
-            </div>
-            
-        </div>
-        <div class="copyright">iWebEstate Real estate Online application<br> &copy; CoolBreeze 2015</div>
-    </div>
-</div>
-	
+	<div class="home-footer">
+		<div class="home-wrapper">
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+					<div class="osLight footer-header">Real Estate Information</div>
+					<ul class="footer-nav pb20">
+						<li><a href="#">About</a></li>
+						<li><a href="#">Team</a></li>
+						<li><a href="#">Terms & Privacy</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3"></div>
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+					<div class="osLight footer-header">Get in Touch: Dipesh Walia</div>
+					<ul class="footer-nav pb20">
+						<li class="footer-phone"><span
+							class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+							438 402 52 02</li>
+						<li class="footer-address osLight">
+							<p>7141 Sherbrooke Street West</p>
+							<p>Montreal, Quebec H4B 1R6</p>
+							<p>Canada</p>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+			<div class="copyright">
+				iWebEstate Real estate Online application<br> &copy; CoolBreeze
+				2015
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>
-
-

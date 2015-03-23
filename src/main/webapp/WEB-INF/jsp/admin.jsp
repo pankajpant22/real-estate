@@ -212,54 +212,39 @@
 		</div>
 	</div>
 
+<!-- Footer -->
 
-	<!-- Footer -->
-
-	<div class="home-footer">
-		<div class="home-wrapper">
-			<div class="row">
-				<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-					<div class="osLight footer-header">Real Estate Information</div>
-					<ul class="footer-nav pb20">
-						<li><a href="#">About</a></li>
-						<li><a href="#">Team</a></li>
-						<li><a href="#">Terms & Privacy</a></li>
-					</ul>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-					<div class="osLight footer-header">Get in Touch</div>
-					<ul class="footer-nav pb20">
-						<li class="footer-phone"><span
-							class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
-							800 234 67 89</li>
-						<li class="footer-address osLight">
-							<p>516 Green St</p>
-							<p>San Francisco, CA 94133</p>
-							<p>United States</p>
-						</li>
-					</ul>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-					<div class="osLight footer-header">Subscribe to Our
-						Newsletter</div>
-					<form role="form">
-						<div class="form-group">
-							<input type="email" class="form-control"
-								placeholder="Email Address">
-						</div>
-						<div class="form-group">
-							<a href="#" class="btn btn-green btn-block isThemeBtn">Subscribe</a>
-						</div>
-					</form>
-				</div>
-			</div>
-			<div class="copyright">
-				iWebEstate Real estate Online application<br> &copy; CoolBreeze
-				2015
-			</div>
-		</div>
-	</div>
-
+<div class="home-footer">
+    <div class="home-wrapper">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                <div class="osLight footer-header">Real Estate Information</div>
+                <ul class="footer-nav pb20">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Terms & Privacy</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                <div class="osLight footer-header">Get in Touch: Dipesh Walia</div>
+                <ul class="footer-nav pb20">
+                    <li class="footer-phone"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> 438 402 52 02</li>
+                    <li class="footer-address osLight">
+                        <p>7141 Sherbrooke Street West</p>
+                        <p>Montreal, Quebec H4B 1R6</p>
+                        <p>Canada</p>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        <div class="copyright">iWebEstate Real estate Online application<br> &copy; CoolBreeze 2015</div>
+    </div>
+</div>
+	
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/jquery-ui-touch-punch.js"></script>

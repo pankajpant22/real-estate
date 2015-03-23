@@ -27,6 +27,21 @@ public class Property implements Serializable {
 	
 	private String city;
 	
+	private int bedroom;
+	
+	private int bathroom;
+	
+	private String description;
+	
+	private double lat;
+	
+	private double lng;
+	
+	private String message;
+	
+	private int sold;
+	
+	private Date dateSold;
 	
 	private int price;
 	
@@ -45,6 +60,72 @@ public class Property implements Serializable {
 
 	public void setPublishedDate(Date publishedDate) {
 		this.publishedDate = publishedDate;
+	}
+
+				
+	public int getSold() {
+		return sold;
+	}
+
+	public void setSold(int sold) {
+		this.sold = sold;
+	}
+
+	
+	public Date getDateSold() {
+		return dateSold;
+	}
+
+	public void setDateSold(Date dateSold) {
+		this.dateSold = dateSold;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public double getLat() {
+		return lat;
+	}
+
+	public void setLat(double lat) {
+		this.lat = lat;
+	}
+
+	public double getLng() {
+		return lng;
+	}
+
+	public void setLng(double lng) {
+		this.lng = lng;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getBedroom() {
+		return bedroom;
+	}
+
+	public void setBedroom(int bedroom) {
+		this.bedroom = bedroom;
+	}
+
+	public int getBathroom() {
+		return bathroom;
+	}
+
+	public void setBathroom(int bathroom) {
+		this.bathroom = bathroom;
 	}
 
 	public int getId() {

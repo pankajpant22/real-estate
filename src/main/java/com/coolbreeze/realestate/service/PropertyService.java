@@ -2,7 +2,6 @@ package com.coolbreeze.realestate.service;
 
 import java.util.List;
 
-
 import org.hibernate.Query;
 import org.hibernate.Session;
 //import javax.transaction.Transactional;
@@ -55,6 +54,16 @@ public class PropertyService {
 	@Transactional
 	public void delete(int id) {
 		propertyDao.delete(id);
+	}
+
+	@Transactional
+	public Property find(int id) {
+		return propertyDao.find(id);
+	}
+
+	@Transactional
+	public void addMessage(int id, String message) {
+		propertyDao.addMessage(id,message);
 	}
 	
 	

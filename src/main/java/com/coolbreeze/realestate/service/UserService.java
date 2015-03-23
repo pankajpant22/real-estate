@@ -4,6 +4,7 @@ import java.util.List;
 
 
 
+
 //import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -64,7 +65,28 @@ public class UserService {
 		return userDao.findOne(name);
 	}
 
+	@Transactional
 	public void delete(int userId) {
 		userDao.delete(userId);
 	}
+
+	@Transactional
+	public void insertIntoRole(int id, String role) {
+		 switch (role) 
+		 {
+         	case "ROLE_BUYER": userDao.insertRoleBuyer(id);
+                  			   break;
+         	case "ROLE_SELLER": userDao.insertRoleSeller(id);
+			   					break;
+         }
+	}
+
+	@Transactional
+	public User findOne(User user) {
+		int id = user.getUserId();
+		return userDao.findOne(id);
+	
+	}
+
+	
 }

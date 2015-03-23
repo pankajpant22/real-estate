@@ -68,54 +68,64 @@
 
 
 <script type="text/javascript">
-	$(document).ready(
-			function() {
-				$('.registrationForm').validate(
-						{
-							rules : {
-								userName : {
-									required : true,
-									minlength : 3,
-									remote: {
-										url : "<spring:url value='/register/available.html' />",
-										type:"get",
-										data: {
-											username: function(){
-												return $("#userName").val();
+	$(document)
+			.ready(
+					function() {
+						$('.registrationForm')
+								.validate(
+										{
+											rules : {
+												userName : {
+													required : true,
+													minlength : 3,
+													remote : {
+														url : "<spring:url value='/register/available.html' />",
+														type : "get",
+														data : {
+															username : function() {
+																return $(
+																		"#userName")
+																		.val();
+															}
+														}
+													}
+												},
+												email : {
+													required : true,
+													email : true
+												},
+												password : {
+													required : true,
+													minlength : 4
+												},
+												password_again : {
+													required : true,
+													minlength : 4,
+													equalTo : "#password"
+												}
+											},
+											highlight : function(element) {
+												$(element).closest(
+														'.form-group')
+														.removeClass(
+																'has-success')
+														.addClass('has-error');
+											},
+											unhighlight : function(element) {
+												$(element)
+														.closest('.form-group')
+														.removeClass(
+																'has-error')
+														.addClass('has-success');
+											},
+											messages : {
+												userName : {
+													remote : "Such User Name Exists !!!!"
+												}
 											}
-										}
-									}
-								},
-								email : {
-									required : true,
-									email : true
-								},
-								password : {
-									required : true,
-									minlength : 4
-								},
-								password_again : {
-									required : true,
-									minlength : 4,
-									equalTo : "#password"
-								}
-							},
-							highlight : function(element) {
-								$(element).closest('.form-group').removeClass(
-										'has-success').addClass('has-error');
-							},
-							unhighlight : function(element) {
-								$(element).closest('.form-group').removeClass(
-										'has-error').addClass('has-success');
-							},
-							messages: {
-								userName: {
-									remote: "Such User Name Exists !!!!"
-								}
-							}
-						});
-				
-			});
+										});
+
+					});
 </script>
 
 </head>
@@ -199,6 +209,13 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<label for="Role" class="col-sm-2 control-label">Role: </label>
+				<div class="col-sm-10">
+					<input type="radio" name="role" value="ROLE_SELLER" >Seller
+					<input type="radio" name="role" value="ROLE_BUYER" checked>Buyer
+				</div>
+			</div>
+			<div class="form-group">
 				<div class="col-sm-10">
 					<input type="submit" value="Submit" class="btn btn-lg btn-primary">
 				</div>
@@ -207,53 +224,38 @@
 		</form:form>
 	</div>
 
-	<!-- Footer -->
+<!-- Footer -->
 
-	<div class="home-footer">
-		<div class="home-wrapper">
-			<div class="row">
-				<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-					<div class="osLight footer-header">Real Estate Information</div>
-					<ul class="footer-nav pb20">
-						<li><a href="#">About</a></li>
-						<li><a href="#">Team</a></li>
-						<li><a href="#">Terms & Privacy</a></li>
-					</ul>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-					<div class="osLight footer-header">Get in Touch</div>
-					<ul class="footer-nav pb20">
-						<li class="footer-phone"><span
-							class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
-							800 234 67 89</li>
-						<li class="footer-address osLight">
-							<p>516 Green St</p>
-							<p>San Francisco, CA 94133</p>
-							<p>United States</p>
-						</li>
-					</ul>
-				</div>
-				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-					<div class="osLight footer-header">Subscribe to Our
-						Newsletter</div>
-					<form role="form">
-						<div class="form-group">
-							<input type="email" class="form-control"
-								placeholder="Email Address">
-						</div>
-						<div class="form-group">
-							<a href="#" class="btn btn-green btn-block isThemeBtn">Subscribe</a>
-						</div>
-					</form>
-				</div>
-			</div>
-			<div class="copyright">
-				iWebEstate Real estate Online application<br> &copy; CoolBreeze
-				2015
-			</div>
-		</div>
-	</div>
-
+<div class="home-footer">
+    <div class="home-wrapper">
+        <div class="row">
+            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+                <div class="osLight footer-header">Real Estate Information</div>
+                <ul class="footer-nav pb20">
+                    <li><a href="#">About</a></li>
+                    <li><a href="#">Team</a></li>
+                    <li><a href="#">Terms & Privacy</a></li>
+                </ul>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                <div class="osLight footer-header">Get in Touch: Dipesh Walia</div>
+                <ul class="footer-nav pb20">
+                    <li class="footer-phone"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> 438 402 52 02</li>
+                    <li class="footer-address osLight">
+                        <p>7141 Sherbrooke Street West</p>
+                        <p>Montreal, Quebec H4B 1R6</p>
+                        <p>Canada</p>
+                    </li>
+                </ul>
+            </div>
+            
+        </div>
+        <div class="copyright">iWebEstate Real estate Online application<br> &copy; CoolBreeze 2015</div>
+    </div>
+</div>
 
 </body>
 </html>

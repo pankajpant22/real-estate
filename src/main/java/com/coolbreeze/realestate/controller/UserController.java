@@ -2,6 +2,7 @@ package com.coolbreeze.realestate.controller;
 
 import java.security.Principal;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,12 +51,18 @@ public class UserController {
 	}
 	
 	@RequestMapping(value="/register", method=RequestMethod.POST)
-	public String doRegister(@ModelAttribute("user") User user){
+	public String doRegister(HttpServletRequest request,@ModelAttribute("user") User user){
 //		if(result.hasErrors())
 //		{
 //			return "redirect:/register.html?error=true";
 //		}
+		String role = request.getParameter("role");
+		String name = request.getParameter("userName");
 		userService.save(user);
+		User u = userService.findOne(name);
+		int id = u.getUserId();
+		System.out.println("Inserting into Role Table Mapping, id: " +id );
+		userService.insertIntoRole(id,role);
 		return "redirect:/register.html?success=true";
 	}
 	

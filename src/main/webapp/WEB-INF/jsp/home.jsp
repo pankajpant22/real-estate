@@ -142,84 +142,21 @@
 <div class="home-content">
 <h2 class="osLight">Recently Listed Properties</h2>
 <div class="row pb40">
+    <c:forEach items="${propertyList}" var="property">
     <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-        <a href="single.html" class="propWidget-2">
+        <a href='<spring:url value="/property/${property.id}.html"/>' class="propWidget-2">
             <div class="fig">
-                <img src="images/prop/1-1.png" alt="Modern Residence in New York">
-                <img class="blur" src="images/prop/1-1.png" alt="Modern Residence in New York">
+                <img src="images/prop/${property.id}-1.png" alt="${property.name}">
+                <img class="blur" src="images/prop/${property.id}-1.png" alt="${property.name}">
                 <div class="opac"></div>
-                <div class="priceCap osLight"><span>$1,750,000</span></div>
+                <div class="priceCap osLight"><span>$${property.price}</span></div>
                 <div class="figType">FOR SALE</div>
-                <h3 class="osLight">Modern Residence in New York</h3>
-                <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
+                <h3 class="osLight">${property.name}</h3>
+                <div class="address">${property.address}</div>
             </div>
         </a>
     </div>
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-        <a href="single.html" class="propWidget-2">
-            <div class="fig">
-                <img src="images/prop/2-1.png" alt="Hauntingly Beautiful Estate">
-                <img class="blur" src="images/prop/2-1.png" alt="Hauntingly Beautiful Estate">
-                <div class="opac"></div>
-                <div class="priceCap osLight"><span>$1,550,000</span></div>
-                <div class="figType">FOR RENT</div>
-                <h3 class="osLight">Hauntingly Beautiful Estate</h3>
-                <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
-            </div>
-        </a>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-        <a href="single.html" class="propWidget-2">
-            <div class="fig">
-                <img src="images/prop/3-1.png" alt="Luxury Mansion">
-                <img class="blur" src="images/prop/3-1.png" alt="Luxury Mansion">
-                <div class="opac"></div>
-                <div class="priceCap osLight"><span>$2,350,000</span></div>
-                <div class="figType">FOR SALE</div>
-                <h3 class="osLight">Luxury Mansion</h3>
-                <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
-            </div>
-        </a>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-        <a href="single.html" class="propWidget-2">
-            <div class="fig">
-                <img src="images/prop/4-1.png" alt="Sophisticated Residence">
-                <img class="blur" src="images/prop/4-1.png" alt="Sophisticated Residence">
-                <div class="opac"></div>
-                <div class="priceCap osLight"><span>$1,340,000</span></div>
-                <div class="figType">FOR RENT</div>
-                <h3 class="osLight">Sophisticated Residence</h3>
-                <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
-            </div>
-        </a>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-        <a href="single.html" class="propWidget-2">
-            <div class="fig">
-                <img src="images/prop/5-1.png" alt="House With a Lovely Glass">
-                <img class="blur" src="images/prop/5-1.png" alt="House With a Lovely Glass">
-                <div class="opac"></div>
-                <div class="priceCap osLight"><span>$1,930,000</span></div>
-                <div class="figType">FOR SALE</div>
-                <h3 class="osLight">House With a Lovely Glass</h3>
-                <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
-            </div>
-        </a>
-    </div>
-    <div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-        <a href="single.html" class="propWidget-2">
-            <div class="fig">
-                <img src="images/prop/6-1.png" alt="Modern Residence in New York">
-                <img class="blur" src="images/prop/1-1.png" alt="Modern Residence in New York">
-                <div class="opac"></div>
-                <div class="priceCap osLight"><span>$1,750,000</span></div>
-                <div class="figType">FOR SALE</div>
-                <h3 class="osLight">Modern Residence in New York</h3>
-                <div class="address">39 Remsen St, Brooklyn, NY 11201, USA</div>
-            </div>
-        </a>
-    </div>
+    </c:forEach>
 </div>
 </div>
 </div>
@@ -238,27 +175,20 @@
                 </ul>
             </div>
             <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <div class="osLight footer-header">Get in Touch</div>
+                
+            </div>
+            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                <div class="osLight footer-header">Get in Touch: Dipesh Walia</div>
                 <ul class="footer-nav pb20">
-                    <li class="footer-phone"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> 800 234 67 89</li>
+                    <li class="footer-phone"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> 438 402 52 02</li>
                     <li class="footer-address osLight">
-                        <p>516 Green St</p>
-                        <p>San Francisco, CA 94133</p>
-                        <p>United States</p>
+                        <p>7141 Sherbrooke Street West</p>
+                        <p>Montreal, Quebec H4B 1R6</p>
+                        <p>Canada</p>
                     </li>
                 </ul>
             </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <div class="osLight footer-header">Subscribe to Our Newsletter</div>
-                <form role="form">
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Email Address">
-                    </div>
-                    <div class="form-group">
-                        <a href="#" class="btn btn-green btn-block isThemeBtn">Subscribe</a>
-                    </div>
-                </form>
-            </div>
+            
         </div>
         <div class="copyright">iWebEstate Real estate Online application<br> &copy; CoolBreeze 2015</div>
     </div>
