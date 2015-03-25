@@ -14,4 +14,5 @@ public interface UserDao {
 	public void delete(int userId);
 	public void insertRoleBuyer(int id);
 	public void insertRoleSeller(int id);
+	public boolean updateUser(String email, String randomNum);
 }

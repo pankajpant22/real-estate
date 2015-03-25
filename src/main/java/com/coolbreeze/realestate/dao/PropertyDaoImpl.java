@@ -1,6 +1,9 @@
 package com.coolbreeze.realestate.dao;
 
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -8,6 +11,7 @@ import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Repository;
 
@@ -32,7 +36,8 @@ public class PropertyDaoImpl implements PropertyDao {
 	@Override
 	public List<Property> findAll() {
 		Session session = this.sessionFactory.getCurrentSession();
-        List<Property> propertyList = session.createQuery("from Property").list();
+        List<Property> propertyList = session.createQuery("from Property "
+        		+ "ORDER BY publishedDate DESC").list();
         for(Property prop : propertyList){
             logger.info("Property List::"+prop);
         }
@@ -82,7 +87,56 @@ public class PropertyDaoImpl implements PropertyDao {
 		query.setParameter("message", message);
 		int result = query.executeUpdate();
 	}
-	
-	
 
+	@Override
+	public List<Property> searchProperty(String city, int bed, int bath, String type) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from Property where city = :city and "
+				+ "bedroom = :bed and bathroom =:bath and type = :type ");
+		query.setParameter("city", city);
+		query.setParameter("bed", bed);
+		query.setParameter("bath", bath);
+		query.setParameter("type", type);
+		List<Property> propertyList = query.list();
+        for(Property prop : propertyList){
+            logger.info("Property List::"+prop);
+        }
+        return propertyList;
+	}
+
+	@Override
+	public List<Property> searchPropertyMap(HashMap<String, String> map) {
+		Session session = this.sessionFactory.getCurrentSession();
+		StringBuilder builder = new StringBuilder("from Property WHERE ");
+	    Iterator it = map.entrySet().iterator();
+	    while (it.hasNext()) {
+	        Map.Entry pair = (Map.Entry)it.next();
+	        
+	        if((pair.getValue()).equals(""))
+	        	continue;
+	        if((pair.getValue()).equals("on"))
+	        	continue;
+	        if((pair.getValue()).equals("0"))
+	        	continue;
+	        
+	        String q =pair.getKey() + " = " +"'"+ pair.getValue()+"'"+ " AND ";
+	        builder.append(q);
+	    }
+	    
+	    String queryString = builder.toString();
+	    String queryFinal = queryString.substring(0,queryString.length()-4);
+	    
+	    System.out.println(queryFinal);
+	    
+		Query query = session.createQuery(queryFinal); 
+		
+		List<Property> propertyList = query.list();
+        for(Property prop : propertyList){
+            logger.info("Property List::"+prop);
+        }
+        return propertyList;
+	}
+
+	
+	
 }

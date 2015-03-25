@@ -47,6 +47,8 @@ public class Property implements Serializable {
 	
 	private String zip;
 	
+	private String type;
+	
 	@Column(name = "published_date")
 	private Date publishedDate;
 	
@@ -62,7 +64,15 @@ public class Property implements Serializable {
 		this.publishedDate = publishedDate;
 	}
 
-				
+					
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public int getSold() {
 		return sold;
 	}

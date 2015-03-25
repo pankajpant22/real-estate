@@ -1,5 +1,6 @@
 package com.coolbreeze.realestate.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -65,6 +66,16 @@ public class PropertyService {
 	public void addMessage(int id, String message) {
 		propertyDao.addMessage(id,message);
 	}
+
+	public List<Property> searchProperty(String city, int bed, int bath,String type) {
+		return propertyDao.searchProperty(city,bed,bath,type);
+	}
+
+	public List<Property> searchPropertyMap(HashMap<String, String> map) {
+		return propertyDao.searchPropertyMap(map);
+	}
+
+	
 	
 	
 }

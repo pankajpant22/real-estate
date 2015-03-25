@@ -86,4 +86,20 @@ public class UserDaoImpl implements UserDao {
 		int result = query.executeUpdate();
 	}
 
+	@Override
+	public boolean updateUser(String email, String randomNum) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createQuery("update User set password = :password" +
+				" where email = :email");
+		query.setParameter("password", randomNum);
+		query.setParameter("email", email);
+		int result = query.executeUpdate();
+		if(result > 0) {
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
 }

@@ -1,5 +1,6 @@
 package com.coolbreeze.realestate.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.coolbreeze.realestate.entity.Property;
@@ -15,5 +16,7 @@ public interface PropertyDao {
 	public void delete(int id);
 	public Property find(int id);
 	public void addMessage(int id, String message);
+	public List<Property> searchProperty(String city, int bed, int bath,String type);
+	public List<Property> searchPropertyMap(HashMap<String, String> map);
 	
 }

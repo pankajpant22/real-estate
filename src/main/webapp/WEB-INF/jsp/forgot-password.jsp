@@ -148,18 +148,14 @@
 
 	<div class="home-wrapper">
 		<br> <br>
-		<form class="form-signin" role="form"
-			action='/j_spring_security_check' method="POST">
-			<h2 class="form-signin-heading">Please sign in</h2>
-			<label for="inputEmail" class="sr-only">User Name</label> <input
-				type="text" id="username" name="j_username" class="form-control"
-				placeholder="User Name" required autofocus> <label
-				for="inputPassword" class="sr-only">Password</label> <input
-				type="password" id="password" name="j_password" class="form-control"
-				placeholder="Password" required>
-			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
-				in</button>
-				<a href='<spring:url value="/forgotPassword.html"/>' id = "forgotPassword"  >Forgot Password</a>
+		<form class="form-signin" role="form" method="POST">
+			<h2 class="form-signin-heading">Give Your Email </h2>
+			<span style="color:green; font-weight: bold;">${message}</span>
+			<label for="inputEmail" class="sr-only">Email: </label> <input
+				type="text" id="email" name="email" class="form-control"
+				placeholder="Email" required autofocus> 
+				<br>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
 		</form>
 
 	</div>

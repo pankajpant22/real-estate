@@ -18,27 +18,12 @@
     <link href="css/fullscreen-slider.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet" id="app">
-    <script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-	<!-- Latest compiled and minified CSS -->
-	<link rel="stylesheet"
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-	
-	<!-- Optional theme -->
-	<link rel="stylesheet"
-		href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-	
-	<!-- Latest compiled and minified JavaScript -->
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-    
-
+        
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 
 </head>
 <body class="notransition no-hidden">
@@ -83,20 +68,22 @@
         <div class="home-subtitle">With iWebEstate</div>
     </div>
     <div class="search-panel">
-        <form class="form-inline" role="form">
+        <form class="form-inline" role="form" action='/search.html' 
+        method="post">
             <div class="form-group">
-                <input type="text" class="form-control" id="city" placeholder="City" autocomplete="off">
+                <input type="text" name="city" class="form-control" id="city" placeholder="City" 
+                 autocomplete="off">
             </div>
             <div class="form-group hidden-xs adv">
                 <a href="#" data-toggle="dropdown" class="btn btn-white dropdown-toggle">
                     <span class="dropdown-label">Bedrooms</span> <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-select">
-                    <li class="active"><input type="radio" name="bedno" checked="checked"><a href="#">Bedrooms</a></li>
-                    <li><input type="radio" name="bedno"><a href="#">1</a></li>
-                    <li><input type="radio" name="bedno"><a href="#">2</a></li>
-                    <li><input type="radio" name="bedno"><a href="#">3</a></li>
-                    <li><input type="radio" name="bedno"><a href="#">4</a></li>
+                    <li class="active"><input type="radio" name="bedno" checked="checked" value="0" ><a href="#">Bedroom</a></li>
+                    <li><input type="radio" name="bedno" value="1"><a href="#">1</a></li>
+                    <li><input type="radio" name="bedno" value="2"><a href="#">2</a></li>
+                    <li><input type="radio" name="bedno" value="3"><a href="#">3</a></li>
+                    <li><input type="radio" name="bedno" value="4"><a href="#">4</a></li>
                 </ul>
             </div>
             <div class="form-group hidden-xs adv">
@@ -104,34 +91,50 @@
                     <span class="dropdown-label">Bathrooms</span> <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu dropdown-select">
-                    <li class="active"><input type="radio" name="bathno" checked="checked"><a href="#">Bathrooms</a></li>
-                    <li><input type="radio" name="bathno"><a href="#">1</a></li>
-                    <li><input type="radio" name="bathno"><a href="#">2</a></li>
-                    <li><input type="radio" name="bathno"><a href="#">3</a></li>
-                    <li><input type="radio" name="bathno"><a href="#">4</a></li>
+                    <li class="active"><input type="radio" name="bathno" checked="checked" value="0"><a href="#">Bathroom</a></li>
+                    <li><input type="radio" name="bathno" value="1"><a href="#">1</a></li>
+                    <li><input type="radio" name="bathno" value="2"><a href="#">2</a></li>
+                    <li><input type="radio" name="bathno" value="3"><a href="#">3</a></li>
+                    <li><input type="radio" name="bathno" value="4"><a href="#">4</a></li>
+                </ul>
+            </div>
+            <div class="form-group hidden-xs adv">
+                <a href="#" data-toggle="dropdown" class="btn btn-white dropdown-toggle">
+                    <span class="dropdown-label">Nearby Facilities</span> <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-select">
+                    <li class="active"><input type="radio" name="facility" checked="checked" ><a href="#">Facilities</a></li>
+                    <li><input type="radio" name="facility" value="shopping"><a href="#">Shopping centers</a></li>
+                    <li><input type="radio" name="facility" value="metro"><a href="#">Metro</a></li>
+                    <li><input type="radio" name="facility" value="bus"><a href="#">Bus</a></li>
+                    <li><input type="radio" name="facility" value="schools"><a href="#">Schools</a></li>
+                    <li><input type="radio" name="facility" value="hospitals"><a href="#">Hospitals</a></li>
                 </ul>
             </div>
             <div class="form-group hidden-xs adv">
                 <div class="input-group">
                     <div class="input-group-addon">$</div>
-                    <input class="form-control price" type="text" placeholder="From">
+                    <input class="form-control price" type="text" placeholder="From" name="priceFrom" >
                 </div>
             </div>
             <div class="form-group hidden-xs adv">
                 <div class="input-group">
                     <div class="input-group-addon">$</div>
-                    <input class="form-control price" type="text" placeholder="To">
+                    <input class="form-control price" type="text" placeholder="To" name="priceTo" >
                 </div>
             </div>
             <div class="form-group hidden-xs adv">
-                <div class="checkbox custom-checkbox"><label><input type="checkbox"><span class="fa fa-check"></span> For Rent</label></div>
-            </div>
-            <div class="form-group hidden-xs adv">
-                <div class="checkbox custom-checkbox"><label><input type="checkbox"><span class="fa fa-check"></span> For Sale</label></div>
+                <a href="#" data-toggle="dropdown" class="btn btn-white dropdown-toggle">
+                    <span class="dropdown-label">Type</span> <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-select">
+                    <li class="active"><input type="radio" name="type" checked="checked" ><a href="#">Type</a></li>
+                    <li><input type="radio" name="type" value="resident"><a href="#">Residential</a></li>
+                    <li><input type="radio" name="type" value="condo"><a href="#">Condo</a></li>
+                </ul>
             </div>
             <div class="form-group">
-                <a href="explore.html" class="btn btn-green isThemeBtn">Search</a>
-                <a href="#" class="btn btn-o btn-white pull-right visible-xs" id="advanced">Advanced Search <span class="fa fa-angle-up"></span></a>
+            	<input type="submit" value="Search" class="btn btn-green isThemeBtn">
             </div>
         </form>
     </div>
@@ -150,7 +153,7 @@
                 <img class="blur" src="images/prop/${property.id}-1.png" alt="${property.name}">
                 <div class="opac"></div>
                 <div class="priceCap osLight"><span>$${property.price}</span></div>
-                <div class="figType">FOR SALE</div>
+                <div class="figType">FOR ${property.type}</div>
                 <h3 class="osLight">${property.name}</h3>
                 <div class="address">${property.address}</div>
             </div>
@@ -205,6 +208,15 @@
 <script src="js/infobox.js"></script>
 <script src="js/jquery.visible.js"></script>
 <script src="js/home.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('input.checkbox').on('change', function() {
+	    $('input.checkbox').not(this).prop('checked', false);  
+	});
+	
+});
+</script>
+
 
 
 </body>
