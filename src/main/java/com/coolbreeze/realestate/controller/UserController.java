@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.coolbreeze.realestate.entity.User;
+import com.coolbreeze.realestate.service.PropertyService;
 import com.coolbreeze.realestate.service.UserService;
 
 
@@ -25,6 +26,9 @@ public class UserController {
 	
 	@Autowired
 	private UserService userService;
+	
+	@Autowired
+	private PropertyService propertyService;
 	
 	@ModelAttribute("user")
 	public User construct(){
@@ -78,6 +82,18 @@ public class UserController {
 	public String available(@RequestParam String username){
 		Boolean available = userService.findOne(username)== null;
 		return available.toString();
+	}
+	
+	
+	@RequestMapping(value = "/account/updateProperty",method=RequestMethod.POST)
+	public String updateProperty(HttpServletRequest request ,Model model, Principal principal ){
+		String name = principal.getName();
+		String idString=request.getParameter("id");
+		String sold = request.getParameter("sold");
+		int id = Integer.valueOf(idString);
+		int s = Integer.valueOf(sold);
+		propertyService.updateProperty(id,s);
+		return "redirect:/account.html";
 	}
 	
 }

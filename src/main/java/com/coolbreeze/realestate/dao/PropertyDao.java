@@ -18,5 +18,6 @@ public interface PropertyDao {
 	public void addMessage(int id, String message);
 	public List<Property> searchProperty(String city, int bed, int bath,String type);
 	public List<Property> searchPropertyMap(HashMap<String, String> map);
+	public void updateProperty(int id, int s);
 	
 }

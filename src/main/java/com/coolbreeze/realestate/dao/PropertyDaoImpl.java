@@ -119,6 +119,20 @@ public class PropertyDaoImpl implements PropertyDao {
 	        if((pair.getValue()).equals("0"))
 	        	continue;
 	        
+	        if((pair.getKey()=="priceFrom"))
+	        {
+	        	String q ="price" + " > " +"'"+ pair.getValue()+"'"+ " AND ";
+	        	builder.append(q);
+	        	continue;
+	    	}
+	        
+	        if((pair.getKey()=="priceTo"))
+	        {
+	        	String q ="price" + " < " +"'"+ pair.getValue()+"'"+ " AND ";
+	        	builder.append(q);
+	        	continue;
+	    	}
+	        
 	        String q =pair.getKey() + " = " +"'"+ pair.getValue()+"'"+ " AND ";
 	        builder.append(q);
 	    }
@@ -135,6 +149,15 @@ public class PropertyDaoImpl implements PropertyDao {
             logger.info("Property List::"+prop);
         }
         return propertyList;
+	}
+
+	@Override
+	public void updateProperty(int id, int s) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createSQLQuery("UPDATE Property SET sold = :sold WHERE id =:id ");
+		query.setParameter("id", id);
+		query.setParameter("sold", s);
+		int result = query.executeUpdate();
 	}
 
 	

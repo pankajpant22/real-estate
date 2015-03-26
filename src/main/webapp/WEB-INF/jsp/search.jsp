@@ -21,7 +21,8 @@
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet" id="app">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"/>
+	
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -80,51 +81,29 @@
 <div id="mapView"><div class="mapPlaceholder"><span class="fa fa-spin fa-spinner"></span> Loading map...</div></div>
 <div id="content">
 <div class="filter">
-    <h1 class="osLight">Filter your results</h1>
+    <h1 class="osLight">Sort your results</h1>
     <a href="#" class="handleFilter"><span class="icon-equalizer"></span></a>
     <div class="clearfix"></div>
     <form class="filterForm" method="post" action="#">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 formItem">
                 <div class="formField">
-                    <label>Property Type</label>
+                    <label>Sort By Price</label>
                     <a href="#" data-toggle="dropdown" class="btn btn-gray dropdown-btn dropdown-toggle propTypeSelect">
-                        <span class="dropdown-label">All</span>
+                        <span class="dropdown-label">Price</span>
                         <span class="fa fa-angle-down dsArrow"></span>
                     </a>
                     <ul class="dropdown-menu dropdown-select full" role="menu">
-                        <li class="active"><input type="radio" name="pType" checked="checked"><a href="#">All</a></li>
-                        <li><input type="radio" name="pType" value="resident"><a href="#">Residential</a></li>
-                        <li><input type="radio" name="pType" value="condo"><a href="#">Condo</a></li>
+                        <li class="active"><input type="radio" name="pType" checked="checked"><a href="#">Price</a></li>
+                        <li><input type="radio" name="pType" value="ASC"><a href="#">Ascending</a></li>
+                        <li><input type="radio" name="pType" value="DSC"><a href="#">Descending</a></li>
                     </ul>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 formItem">
-                <div class="formField">
-                    <label>Bedrooms</label>
-                    <div class="volume">
-                        <a href="#" class="btn btn-gray btn-round-left"><span class="fa fa-angle-left"></span></a>
-                        <input type="text" name="bed" class="form-control" readonly="readonly" value="1">
-                        <a href="#" class="btn btn-gray btn-round-right"><span class="fa fa-angle-right"></span></a>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 formItem">
-                <div class="formField">
-                    <label>Bathrooms</label>
-                    <div class="volume">
-                        <a href="#" class="btn btn-gray btn-round-left"><span class="fa fa-angle-left"></span></a>
-                        <input type="text" name="bath" class="form-control" readonly="readonly" value="1">
-                        <a href="#" class="btn btn-gray btn-round-right"><span class="fa fa-angle-right"></span></a>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3 formItem">
-                <label>Search</label>
+                <label>Sort</label>
                 <div style="border-radius: 25px;">
                     <input type="submit" class="btn btn-default" style="border-radius: 15px;" value="Submit"/>
                 </div>
@@ -138,7 +117,7 @@
 <div class="row">
 <c:forEach items="${propertyList}" var="property">
 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-    <a href="single.html" class="card">
+    <a href='<spring:url value="/property/${property.id}.html"/>' class="card">
         <div class="figure">
             <img src="images/prop/${property.id}-1.png" alt="image">
             <div class="figCaption">
@@ -157,15 +136,6 @@
 </div>
 </c:forEach>
 </div>
-<ul class="pagination">
-    <li class="disabled"><a href="#"><span class="fa fa-angle-left"></span></a></li>
-    <li class="active"><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
-    <li><a href="#"><span class="fa fa-angle-right"></span></a></li>
-</ul>
 </div>
 </div>
 <div class="clearfix"></div>
@@ -192,7 +162,7 @@
         				title : "'${property.name}'",
         				image : "${property.id}-1-thmb.png",
         				type : 'For ${property.type}',
-        				price : "'${property.price}'",
+        				price : "'$ ${property.price}'",
         				address : "'${property.address}'",
         				bedrooms : "'${property.bedroom}'",
         				bathrooms : "'${property.bathroom}'",

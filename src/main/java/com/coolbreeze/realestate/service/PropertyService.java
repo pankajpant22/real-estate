@@ -67,12 +67,19 @@ public class PropertyService {
 		propertyDao.addMessage(id,message);
 	}
 
+	@Transactional
 	public List<Property> searchProperty(String city, int bed, int bath,String type) {
 		return propertyDao.searchProperty(city,bed,bath,type);
 	}
 
+	@Transactional
 	public List<Property> searchPropertyMap(HashMap<String, String> map) {
 		return propertyDao.searchPropertyMap(map);
+	}
+
+	@Transactional
+	public void updateProperty(int id, int s) {
+		propertyDao.updateProperty(id,s);
 	}
 
 	

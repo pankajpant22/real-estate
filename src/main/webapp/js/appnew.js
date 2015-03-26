@@ -173,20 +173,13 @@ var map;
                                     '<div class="propImg">' +
                                         '<img src="images/prop/' + prop.image + '">' +
                                         '<div class="propBg">' +
-                                            '<div class="propPrice">' + prop.price + '</div>' +
+                                            '<div class="propPrice">' +prop.price + '</div>' +
                                             '<div class="propType">' + prop.type + '</div>' +
                                         '</div>' +
                                     '</div>' +
                                     '<div class="paWrapper">' +
                                         '<div class="propTitle">' + prop.title + '</div>' +
                                         '<div class="propAddress">' + prop.address + '</div>' +
-                                    '</div>' +
-                                    '<div class="propRating">' +
-                                        '<span class="fa fa-star"></span>' +
-                                        '<span class="fa fa-star"></span>' +
-                                        '<span class="fa fa-star"></span>' +
-                                        '<span class="fa fa-star"></span>' +
-                                        '<span class="fa fa-star-o"></span>' +
                                     '</div>' +
                                     '<ul class="propFeat">' +
                                         '<li><span class="fa fa-moon-o"></span> ' + prop.bedrooms + '</li>' +
@@ -196,7 +189,6 @@ var map;
                                     '<div class="clearfix"></div>' +
                                     '<div class="infoButtons">' +
                                         '<a class="btn btn-sm btn-round btn-gray btn-o closeInfo">Close</a>' +
-                                        '<a href="single.html" class="btn btn-sm btn-round btn-green viewInfo btn-' + themeColor + '">View</a>' +
                                     '</div>' +
                                  '</div>';
 

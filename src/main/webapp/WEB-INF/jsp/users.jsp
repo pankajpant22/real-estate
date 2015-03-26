@@ -45,6 +45,39 @@
 			$("#propertyRemove .removeBtn").attr("href", $(this).attr("href"));
 			$('#propertyRemove').modal();
 		});
+		
+		 $(".sold").click(function(){
+             var id = jQuery(this).find('input#id').val();
+             var sold = jQuery(this).find('input#sold').val();
+             if(sold == "1"){
+            	 if (confirm('Are you sure this Property is SOLD ?')) {	
+    	             $.ajax ({
+    	                    url:"/account/updateProperty.html",
+    	                    type:'POST',
+    	                    data: {id:id,
+    	                    	  sold:sold},
+    	                    success:function(response){
+    	                        location.reload();
+    	                    }
+    	                });
+                 	}	 
+             }else{
+            	 if (confirm('Are you sure this Property is NOT SOLD ?')) {	
+    	             $.ajax ({
+    	                    url:"/account/updateProperty.html",
+    	                    type:'POST',
+    	                    data: {id:id,
+    	                    	  sold:sold},
+    	                    success:function(response){
+    	                        location.reload();
+    	                    }
+    	                });
+                 	}
+             }
+             
+	       });
+		 
+
 
 	});
 </script>
@@ -92,7 +125,7 @@
 
 	<div class="home-wrapper">
 		<br> <br>
-		<h2>${user.userName}Properties Listing</h2>
+		<h2>${user.userName}  Properties Listing</h2>
 
 		<hr>
 		<table class="table table-bordered table-hover table-striped">
@@ -122,10 +155,20 @@
 						<td>${prop.message}</td>
 						<c:choose>
       						<c:when test="${prop.sold =='1'}">
-      						<td>Sold</td>
+      						<td><a class="sold" href="#" onClick="return false;">
+      							<img alt="sold" src="images/right.png">
+      							<input type="hidden" id="id" name = "id" value="${prop.id}"/>
+      							<input type="hidden" id="sold" name = "sold" value="0"/>
+      						</a>
+      						</td>
       						</c:when>
       						<c:otherwise>
-      						<td>Not Sold</td>
+      						<td><a class ="sold" href="#" onClick="return false;">
+      							<img alt="sold" src="images/cross.png">
+      							<input type="hidden" id="id" name = "id" value="${prop.id}"/>
+      							<input type="hidden" id="sold" name = "sold" value="1"/>
+      						</a>
+      						</td>
 					        </c:otherwise>
 						</c:choose>
 						<td>${prop.dateSold}</td>
