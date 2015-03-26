@@ -20,6 +20,7 @@
     <link href="css/datepicker.css" rel="stylesheet">
     <link href="css/bootstrap.css" rel="stylesheet">
     <link href="css/app.css" rel="stylesheet" id="app">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -73,10 +74,7 @@
 
 <div id="leftSide"></div>
 
-
-
 <!-- Content -->
-
 
 <div id="wrapper">
 <div id="mapView"><div class="mapPlaceholder"><span class="fa fa-spin fa-spinner"></span> Loading map...</div></div>
@@ -188,37 +186,26 @@
 
 <script type="text/javascript">
 
-    var properties = [{
-        title : 'Luxury Mansion',
-        image : '5-1-thmb.png',
-        type : 'For Rent',
-        price : '$2,350,000',
-        address : '95 Butler St, Brooklyn, NY 11231, USA',
-        bedrooms : '2',
-        bathrooms : '2',
-        area : '2750 Sq Ft',
-        position : {
-            lat : 45.471608,
-            lng : -73.695243
-        },
-        markerIcon : "marker-green.png"
-    },{
-        title : 'Luxury Mansion',
-        image : '5-1-thmb.png',
-        type : 'For Rent',
-        price : '$2,350,000',
-        address : '95 Butler St, Brooklyn, NY 11231, USA',
-        bedrooms : '2',
-        bathrooms : '2',
-        area : '2750 Sq Ft',
-        position : {
-            lat : 45.467257,
-            lng : -73.666635
-        },
-        markerIcon : "marker-green.png"
-    },];
-
-
+	var properties = [
+		<c:forEach items="${propertyList}" var="property">
+                      {
+        				title : "'${property.name}'",
+        				image : "${property.id}-1-thmb.png",
+        				type : 'For ${property.type}',
+        				price : "'${property.price}'",
+        				address : "'${property.address}'",
+        				bedrooms : "'${property.bedroom}'",
+        				bathrooms : "'${property.bathroom}'",
+        				area : '2750 Sq Ft',
+        				position : {
+            						lat : '${property.lat}',
+            						lng : '${property.lng}'
+        				},
+        				markerIcon : "office-building.png"
+    					},
+    	</c:forEach>
+    					];
+	
 </script>
 
 <script src="js/appnew.js" type="text/javascript"></script>

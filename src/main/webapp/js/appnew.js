@@ -73,7 +73,7 @@ var map;
     var themeColorPath = $("#app").attr("href");
     var themeColorFile = themeColorPath.replace("css/app-", "");
     var themeColor = themeColorFile.replace(".css", "");
-    var markerImg = "marker-green.png";
+    var markerImg = "office-building.png";
 
     switch(themeColor) {
         case "red":
@@ -132,6 +132,7 @@ var map;
     // json for properties markers on map
     var props = properties;
 
+    
     // custom infowindow object
     var infobox = new InfoBox({
         disableAutoPan: false,
@@ -244,12 +245,12 @@ var map;
         });
 
         map.mapTypes.set('Styled', styledMapType);
-        map.setCenter(new google.maps.LatLng(40.6984237,-73.9890044));
-        map.setZoom(14);
+        map.setCenter(new google.maps.LatLng(45.501689,-73.567256));
+        map.setZoom(11);
 
         if ($('#address').length > 0) {
             newMarker = new google.maps.Marker({
-                position: new google.maps.LatLng(40.6984237,-73.9890044),
+                position: new google.maps.LatLng(45.501689,-73.567256),
                 map: map,
                 icon: new google.maps.MarkerImage( 
                     'images/marker-new.png',
