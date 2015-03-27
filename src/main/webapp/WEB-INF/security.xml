@@ -25,7 +25,7 @@
 	<authentication-manager>
 		<authentication-provider>
 
-			<!-- <password-encoder hash="bcrypt"/> -->
+			<password-encoder hash="bcrypt"/> 
 
 			<!--<user-service> -->
 			<!--<user name='admin' password='secret' authorities='ROLE_ADMIN,ROLE_USER' 

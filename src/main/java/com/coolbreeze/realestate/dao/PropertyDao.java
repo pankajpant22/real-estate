@@ -10,6 +10,7 @@ import com.coolbreeze.realestate.entity.User;
 public interface PropertyDao {
 
 	public void addProperty(Property property);
+    public List<Property> findAll(int page);
     public List<Property> findAll();
     public Property findOne(int id);
     public List<Property> findByUserId(int userId);
@@ -19,5 +20,6 @@ public interface PropertyDao {
 	public List<Property> searchProperty(String city, int bed, int bath,String type);
 	public List<Property> searchPropertyMap(HashMap<String, String> map);
 	public void updateProperty(int id, int s);
+	public void updateProperty(int id, int s, String dateSold);
 	
 }

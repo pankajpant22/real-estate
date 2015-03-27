@@ -30,6 +30,11 @@ public class PropertyService {
 //	private PropertyRepository propertyRepository;
 	
 	@Transactional
+	public List<Property> findAll(int page){
+		return propertyDao.findAll(page);
+	}
+	
+	@Transactional
 	public List<Property> findAll(){
 		return propertyDao.findAll();
 	}
@@ -80,6 +85,11 @@ public class PropertyService {
 	@Transactional
 	public void updateProperty(int id, int s) {
 		propertyDao.updateProperty(id,s);
+	}
+
+	@Transactional
+	public void updateProperty(int id, int s, String dateSold) {
+		propertyDao.updateProperty(id, s,dateSold);
 	}
 
 	

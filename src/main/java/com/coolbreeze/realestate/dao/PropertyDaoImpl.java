@@ -22,7 +22,9 @@ import com.coolbreeze.realestate.entity.User;
 public class PropertyDaoImpl implements PropertyDao {
 
 	private static final Logger logger = LoggerFactory.getLogger(PropertyDaoImpl.class);
-	 
+	
+	private static final int LIMITITEMSPERPAGE = 6;
+	
 	@Autowired
     private SessionFactory sessionFactory;
     
@@ -32,12 +34,27 @@ public class PropertyDaoImpl implements PropertyDao {
         session.save(property);
         logger.info("User saved successfully, User Details="+property);
 	}
-
+	
 	@Override
 	public List<Property> findAll() {
 		Session session = this.sessionFactory.getCurrentSession();
-        List<Property> propertyList = session.createQuery("from Property "
-        		+ "ORDER BY publishedDate DESC").list();
+		Query query = session.createQuery("from Property "
+        		+ "ORDER BY publishedDate DESC");
+		List<Property> propertyList = query.list();
+        for(Property prop : propertyList){
+            logger.info("Property List::"+prop);
+        }
+        return propertyList;
+	}
+
+	@Override
+	public List<Property> findAll(int page) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createQuery("from Property "
+        		+ "ORDER BY publishedDate DESC");
+		query.setMaxResults(LIMITITEMSPERPAGE);
+	    query.setFirstResult(page * LIMITITEMSPERPAGE);
+        List<Property> propertyList = query.list();
         for(Property prop : propertyList){
             logger.info("Property List::"+prop);
         }
@@ -157,6 +174,17 @@ public class PropertyDaoImpl implements PropertyDao {
 		Query query = session.createSQLQuery("UPDATE Property SET sold = :sold WHERE id =:id ");
 		query.setParameter("id", id);
 		query.setParameter("sold", s);
+		int result = query.executeUpdate();
+	}
+
+	@Override
+	public void updateProperty(int id, int s, String dateSold) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createSQLQuery("UPDATE Property "
+				+ "SET sold = :sold,dateSold = CAST(:dateSold AS datetime) WHERE id =:id ");
+		query.setParameter("id", id);
+		query.setParameter("sold", s);
+		query.setParameter("dateSold", dateSold);
 		int result = query.executeUpdate();
 	}
 

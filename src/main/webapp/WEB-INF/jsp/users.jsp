@@ -146,7 +146,10 @@
 			<tbody>
 				<c:forEach items="${user.properties}" var="prop">
 					<tr id="tr_id_1" class="tr-class-1">
-						<td id="td_id_1" class="td-class-1">${prop.name}</td>
+						<td id="td_id_1" class="td-class-1"><a 
+						href='<spring:url value="/property/update/${prop.id}.html"/>'>
+						<c:out value = "${prop.name}" />
+						</a></td>
 						<td>${prop.address}</td>
 						<td>${prop.city}</td>
 						<td>${prop.price}</td>

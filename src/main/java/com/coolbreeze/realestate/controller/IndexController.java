@@ -2,16 +2,20 @@ package com.coolbreeze.realestate.controller;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.coolbreeze.realestate.entity.Property;
@@ -24,13 +28,14 @@ public class IndexController {
 	private PropertyService propertyService;
 	
 	@RequestMapping("/index")
-	public String index(Model model){
-		model.addAttribute("propertyList",propertyService.findAll());
+	public String index(Model model,@RequestParam(value = "page", defaultValue="0", required=false) int page){
+		model.addAttribute("propertyList",propertyService.findAll(page));
 		return ("home");
 	}
 	
 	@RequestMapping(value="/search", method=RequestMethod.POST)
-	public String searchProperty(HttpServletRequest request,Model model)
+	public String searchProperty(HttpServletRequest request,Model model,
+			@RequestParam(value = "page", defaultValue="0", required=false) int page)
 	{
 		String city = request.getParameter("city");
 		String bedno = request.getParameter("bedno");
@@ -79,11 +84,10 @@ public class IndexController {
 //	    System.out.println(builder.toString());
 //	    System.out.println(queryFinal);
 	    
+		List<Property> propertyList = propertyService.searchPropertyMap(map);
+		
+		model.addAttribute("propertyList", propertyList);
 	    
-		model.addAttribute("propertyList", propertyService.searchPropertyMap(map));
-		
-		//model.addAttribute("propertyList",propertyService.searchProperty(city,bed,bath,type));
-		
 		return "search";
 	}
 	

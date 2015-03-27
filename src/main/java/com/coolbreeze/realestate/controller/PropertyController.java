@@ -1,6 +1,9 @@
 package com.coolbreeze.realestate.controller;
 
 import java.security.Principal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -74,5 +77,39 @@ public class PropertyController {
 		return "redirect:/property/contactAgent/{id}.html";
 	}
 	
+	@RequestMapping("/property/update/{id}")
+	public String updateProperty(Model model,
+			@PathVariable int id, Principal principal )
+	{
+		String name = principal.getName();
+		model.addAttribute("name", name);
+		model.addAttribute("property", propertyService.find(id));
+		return "property-update";
+	}
 	
+	
+	@RequestMapping(value = "/property/update/{id}",method= RequestMethod.POST)
+	public String updatePropertySold(HttpServletRequest request,Model model,
+			@PathVariable int id, Principal principal,final RedirectAttributes redirectAttributes )
+	{
+		String name = principal.getName();
+		model.addAttribute("name", name);
+		String sold = request.getParameter("sold");
+		int s = Integer.valueOf(sold);
+		String dateSold = request.getParameter("dateSold");
+		Date date;
+		try {
+			date = new SimpleDateFormat("dd-MM-yyyy hh:mm").parse(dateSold);
+			String dateString2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
+			String dateFinal = dateString2.replaceAll("[:\\s-]+", "");
+			propertyService.updateProperty(id, s,dateFinal);	
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		model.addAttribute("property", propertyService.find(id));
+		redirectAttributes.addFlashAttribute("message", "Property Updated!!!");
+		return "redirect:/property/update/{id}.html";
+	}
 }

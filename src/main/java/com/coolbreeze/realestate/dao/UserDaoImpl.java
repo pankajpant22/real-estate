@@ -26,9 +26,12 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void addUser(User user) {
 		Session session = this.sessionFactory.getCurrentSession();
-//		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-//		String password = encoder.encode(user.getPassword());
-//		user.setPassword(password);
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String password = encoder.encode(user.getPassword());
+		
+		logger.info("Password="+password);
+		
+		user.setPassword(password);
 		user.setEnabled(true);
         session.save(user);
         logger.info("User saved successfully, User Details="+user);
