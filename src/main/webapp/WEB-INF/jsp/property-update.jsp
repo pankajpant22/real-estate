@@ -58,11 +58,10 @@
 	$(document).ready(function() {
 		$("#dtBox").DateTimePicker();
 
-		$('.contactForm').validate({
+		$('.updateProperty').validate({
 			rules : {
-				email : {
-					required : true,
-					email : true
+				userSold : {
+					required : true
 				}
 			}
 		});
@@ -141,17 +140,32 @@
 				<label class="col-sm-2 control-label">Sold</label>
 				<div class="col-sm-offset-2 col-sm-10">
 					<div class="checkbox">
-							<label> <input name="sold" value="1" type="checkbox"> Sold</label>
-							<label> <input name="sold" value="0" type="checkbox"> Not Sold</label>
+						<c:choose>
+							<c:when test="${property.sold == 1}">
+								<label> <input name="sold" value="1" type="checkbox" checked>Sold</label> 
+								<label> <input name="sold" value="0" type="checkbox">Not Sold</label>	
+      						</c:when>
+							<c:otherwise>
+								<label> <input name="sold" value="1" type="checkbox">Sold</label> 
+								<label> <input name="sold" value="0" type="checkbox" checked>Not Sold</label>	
+      						</c:otherwise>
+						</c:choose>
+						
 					</div>
 				</div>
-				
+
 			</div>
 			<div class="form-group">
 				<label class="col-sm-2 control-label">Date Sold</label>
 				<div class="col-sm-10">
 					<input type="text" name="dateSold" data-field="datetime"
 						placeholder="Date Sold" value="${property.dateSold}" readonly>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label">Sold to (User Name)</label>
+				<div class="col-sm-10">
+					<input type="text" name="userSold" placeholder="Sold to User" >
 				</div>
 			</div>
 			<div class="form-group">
@@ -223,6 +237,14 @@
 
 	<script type="text/javascript"
 		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
+<script type="text/javascript">
+		$(document).ready(function() {
+			$('.checkbox input').on('change', function() {
+				$('.checkbox input').not(this).prop('checked', false);
+			});
+
+		});
+	</script>
 
 </body>
 </html>

@@ -67,7 +67,8 @@ public class PropertyController {
 		String email = request.getParameter("email");
 		String seller_email = request.getParameter("seller_email");
 		String msg = request.getParameter("msg");
-		String message="Contact: "+email+" ,Message: "+msg;
+		String username = request.getParameter("username");
+		String message="Contact: "+email+" ,Message: "+msg+". User Name: "+username;
 		propertyService.addMessage(id,message);
 		
 		mailService.sendMail(seller_email, "Regarding Your Property", "You received a new"
@@ -96,13 +97,18 @@ public class PropertyController {
 		model.addAttribute("name", name);
 		String sold = request.getParameter("sold");
 		int s = Integer.valueOf(sold);
+		String userSold=request.getParameter("userSold");
+		
+		User user=userService.findOne(userSold);
+		int userSoldId = user.getUserId();
+		
 		String dateSold = request.getParameter("dateSold");
 		Date date;
 		try {
 			date = new SimpleDateFormat("dd-MM-yyyy hh:mm").parse(dateSold);
 			String dateString2 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(date);
 			String dateFinal = dateString2.replaceAll("[:\\s-]+", "");
-			propertyService.updateProperty(id, s,dateFinal);	
+			propertyService.updateProperty(id, s,dateFinal,userSoldId);	
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

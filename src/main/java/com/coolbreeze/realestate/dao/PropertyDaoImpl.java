@@ -1,5 +1,8 @@
 package com.coolbreeze.realestate.dao;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -178,14 +181,58 @@ public class PropertyDaoImpl implements PropertyDao {
 	}
 
 	@Override
-	public void updateProperty(int id, int s, String dateSold) {
+	public void updateProperty(int id, int s, String dateSold, int userSoldId) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query = session.createSQLQuery("UPDATE Property "
-				+ "SET sold = :sold,dateSold = CAST(:dateSold AS datetime) WHERE id =:id ");
+				+ "SET sold = :sold,dateSold = CAST(:dateSold AS datetime), user_id=:userSoldId"
+				+ " WHERE id =:id ");
 		query.setParameter("id", id);
 		query.setParameter("sold", s);
 		query.setParameter("dateSold", dateSold);
+		query.setParameter("userSoldId", userSoldId);
 		int result = query.executeUpdate();
+	}
+
+	@Override
+	public void insertProperty(HashMap<String, String> map) {
+		Session session = this.sessionFactory.getCurrentSession();
+		String bed = map.get("bedroom");
+		int bedno = Integer.valueOf(bed);
+		String bath = map.get("bathroom");
+		int bathno = Integer.valueOf(bath);
+		String price = map.get("price");
+		int priceno = Integer.valueOf(price);
+		String userId=map.get("userId");
+		int user_id = Integer.valueOf(userId);
+		
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date = new Date();
+		String current = dateFormat.format(date);
+		String dateFinal = current.replaceAll("[:\\s-]+", "");
+		
+		
+		Query query = session.createSQLQuery("INSERT INTO Property "
+				+ "(address,city,name,price,published_date,zip,user_id,bathroom,bedroom,description,lat,lng,message,sold,dateSold,type,facility) "
+				+ "VALUES (:address,:city,:name,:price,CAST(:current AS datetime),:zip,:userId,:bathroom,:bedroom,:description,"
+				+ "CAST(:lat AS DECIMAL(9,6)),CAST(:lng AS DECIMAL(9,6)),NULL,0,NULL,:type,:facility )");
+		query.setParameter("address", map.get("address"));
+		query.setParameter("city", map.get("city"));
+		query.setParameter("name", map.get("name"));
+		query.setParameter("price", priceno);
+		query.setParameter("current", dateFinal);
+		query.setParameter("zip", map.get("zip"));
+		query.setParameter("userId", user_id);
+		query.setParameter("bathroom", bathno);
+		query.setParameter("bedroom", bedno);
+		query.setParameter("description", map.get("description"));
+		query.setParameter("lat",map.get("lat"));
+		query.setParameter("lng",map.get("lng"));
+		query.setParameter("type", map.get("type"));
+		query.setParameter("facility", map.get("facility"));
+		
+		int result = query.executeUpdate();
+
+	    
 	}
 
 	

@@ -1,6 +1,7 @@
 package com.coolbreeze.realestate.controller;
 
 import java.security.Principal;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -15,7 +16,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.coolbreeze.realestate.entity.Property;
 import com.coolbreeze.realestate.entity.User;
 import com.coolbreeze.realestate.service.PropertyService;
 import com.coolbreeze.realestate.service.UserService;
@@ -96,4 +99,43 @@ public class UserController {
 		return "redirect:/account.html";
 	}
 	
+	@RequestMapping(value="/account",method=RequestMethod.POST)
+	public String saveProperty(Model model,
+			Principal principal, HttpServletRequest request,final RedirectAttributes redirectAttributes ){
+		String username= principal.getName();
+		User user = userService.findOne(username);
+		int userid = user.getUserId();
+		String userId=String.valueOf(userid);
+		String name = request.getParameter("name");
+		String address = request.getParameter("address");
+		String description = request.getParameter("description");
+		String city = request.getParameter("city");
+		String zip = request.getParameter("zip");
+		String bed = request.getParameter("bed");
+		String bath= request.getParameter("bath");
+		String lat = request.getParameter("lat");
+		String lng = request.getParameter("lng");
+		String type = request.getParameter("type");
+		String facility = request.getParameter("facility");
+		String price = request.getParameter("price");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("name", name);
+		map.put("address", address);
+		map.put("description", description);
+		map.put("city", city);
+		map.put("zip", zip);
+		map.put("bedroom", bed);
+		map.put("bathroom", bath);
+		map.put("lat", lat);
+		map.put("lng", lng);
+		map.put("type", type);
+		map.put("facility", facility);
+		map.put("price", price);
+		map.put("userid", userId);
+		
+		propertyService.insertProperty(map);
+		redirectAttributes.addFlashAttribute("message", "Property Added!!!");
+		return "redirect:/account.html";
+	}
 }

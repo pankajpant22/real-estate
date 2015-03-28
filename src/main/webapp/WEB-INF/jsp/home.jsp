@@ -186,19 +186,25 @@
 			<div class="row pb40">
 				<c:forEach items="${propertyList}" var="property">
 					<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-						<a href='<spring:url value="/property/${property.id}.html"/>'
+							<a href='<spring:url value="/property/${property.id}.html"/>'
 							class="propWidget-2">
 							<div class="fig">
-								<img src="images/prop/${property.id}-1.png" alt="${property.name}">
-								<img class="blur" src="images/prop/${property.id}-1.png" alt="${property.name}">
-								
-								<div class="opac"></div>
-								<div class="priceCap osLight">
-									<span>$${property.price}</span>
-								</div>
-								<div class="figType">FOR ${property.type}</div>
-								<h3 class="osLight">${property.name}</h3>
-								<div class="address">${property.address}</div>
+								<c:choose>
+									<c:when test="${property.sold == 1}">
+									<img id ="soldImage" src="images/sold/${property.id}-1.png" alt="${property.name}">
+									</c:when>
+									<c:otherwise>
+									<img src="images/prop/${property.id}-1.png" alt="${property.name}">
+									<img class="blur" src="images/prop/${property.id}-1.png" alt="${property.name}">
+									<div class="opac"></div>
+									<div class="priceCap osLight">
+										<span>$${property.price}</span>
+									</div>
+									<div class="figType">FOR ${property.type}</div>
+									<h3 class="osLight">${property.name}</h3>
+									<div class="address">${property.address}</div>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</a>
 					</div>
@@ -275,7 +281,8 @@
 			$('ul.pagination a').filter(function() {
 				return this.href == url;
 			}).parent().addClass('active');
-
+			
+			
 		});
 	</script>
 

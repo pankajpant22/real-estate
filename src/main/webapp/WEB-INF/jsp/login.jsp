@@ -148,55 +148,69 @@
 
 	<div class="home-wrapper">
 		<br> <br>
+		
 		<form class="form-signin" role="form"
 			action='/j_spring_security_check' method="POST">
 			<h2 class="form-signin-heading">Please sign in</h2>
+			
+			<!-- Error Message -->
+			<c:if test="${not empty SPRING_SECURITY_LAST_EXCEPTION}">
+			<font color="red"> Could Not Login due to:
+			<c:out value="${SPRING_SECURITY_LAST_EXCEPTION.message}" />.
+			</font>
+			</c:if>
+			
 			<label for="inputEmail" class="sr-only">User Name</label> <input
 				type="text" id="username" name="j_username" class="form-control"
-				placeholder="User Name" required autofocus> <label
-				for="inputPassword" class="sr-only">Password</label> <input
+				placeholder="User Name" required autofocus> 
+				<br>
+				<label for="inputPassword" class="sr-only">Password</label> <input
 				type="password" id="password" name="j_password" class="form-control"
 				placeholder="Password" required>
 			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
 				in</button>
-				<a href='<spring:url value="/forgotPassword.html"/>' id = "forgotPassword"  >Forgot Password</a>
+			<a href='<spring:url value="/forgotPassword.html"/>'
+				id="forgotPassword">Forgot Password</a>
 		</form>
 
 	</div>
 
 	<!-- Footer -->
 
-<div class="home-footer">
-    <div class="home-wrapper">
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                <div class="osLight footer-header">Real Estate Information</div>
-                <ul class="footer-nav pb20">
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Team</a></li>
-                    <li><a href="#">Terms & Privacy</a></li>
-                </ul>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <div class="osLight footer-header">Get in Touch: Dipesh Walia</div>
-                <ul class="footer-nav pb20">
-                    <li class="footer-phone"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> 438 402 52 02</li>
-                    <li class="footer-address osLight">
-                        <p>7141 Sherbrooke Street West</p>
-                        <p>Montreal, Quebec H4B 1R6</p>
-                        <p>Canada</p>
-                    </li>
-                </ul>
-            </div>
-            
-        </div>
-        <div class="copyright">iWebEstate Real estate Online application<br> &copy; CoolBreeze 2015</div>
-    </div>
-</div>
-	
+	<div class="home-footer">
+		<div class="home-wrapper">
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+					<div class="osLight footer-header">Real Estate Information</div>
+					<ul class="footer-nav pb20">
+						<li><a href="#">About</a></li>
+						<li><a href="#">Team</a></li>
+						<li><a href="#">Terms & Privacy</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3"></div>
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+					<div class="osLight footer-header">Get in Touch: Dipesh Walia</div>
+					<ul class="footer-nav pb20">
+						<li class="footer-phone"><span
+							class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+							438 402 52 02</li>
+						<li class="footer-address osLight">
+							<p>7141 Sherbrooke Street West</p>
+							<p>Montreal, Quebec H4B 1R6</p>
+							<p>Canada</p>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+			<div class="copyright">
+				iWebEstate Real estate Online application<br> &copy; CoolBreeze
+				2015
+			</div>
+		</div>
+	</div>
+
 </body>
 </html>
 

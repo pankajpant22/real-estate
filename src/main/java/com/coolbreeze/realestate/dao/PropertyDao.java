@@ -20,6 +20,7 @@ public interface PropertyDao {
 	public List<Property> searchProperty(String city, int bed, int bath,String type);
 	public List<Property> searchPropertyMap(HashMap<String, String> map);
 	public void updateProperty(int id, int s);
-	public void updateProperty(int id, int s, String dateSold);
+	public void updateProperty(int id, int s, String dateSold, int userSoldId);
+	public void insertProperty(HashMap<String, String> map);
 	
 }

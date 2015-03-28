@@ -88,8 +88,13 @@ public class PropertyService {
 	}
 
 	@Transactional
-	public void updateProperty(int id, int s, String dateSold) {
-		propertyDao.updateProperty(id, s,dateSold);
+	public void updateProperty(int id, int s, String dateSold,int userSoldId) {
+		propertyDao.updateProperty(id, s,dateSold,userSoldId);
+	}
+
+	@Transactional
+	public void insertProperty(HashMap<String, String> map) {
+		propertyDao.insertProperty(map);
 	}
 
 	

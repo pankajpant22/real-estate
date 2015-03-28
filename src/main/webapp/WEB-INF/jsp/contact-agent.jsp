@@ -78,6 +78,9 @@
 												email : {
 													required : true,
 													email : true
+												},
+												username : {
+													required : true
 												}
 											}
 										});
@@ -151,7 +154,10 @@
       			&nbsp;&nbsp;
       			<label for="price">$ ${property.price}</label>
       		</div>
-    		
+      		<div class="form-group">
+      			<label for="username">Contact User Name (Required):</label>
+      			<input type="username" class="form-control" id="username" name = "username" placeholder="Enter User Name">
+    		</div>
     		<div class="form-group">
       			<label for="email">Contact Email:</label>
       			<input type="email" class="form-control" id="email" name = "email" placeholder="Enter email">
