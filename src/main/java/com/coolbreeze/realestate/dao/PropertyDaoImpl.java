@@ -53,7 +53,7 @@ public class PropertyDaoImpl implements PropertyDao {
 	@Override
 	public List<Property> findAll(int page) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createQuery("from Property "
+		Query query = session.createQuery("from Property Where active = 1 "
         		+ "ORDER BY publishedDate DESC");
 		query.setMaxResults(LIMITITEMSPERPAGE);
 	    query.setFirstResult(page * LIMITITEMSPERPAGE);
@@ -233,6 +233,14 @@ public class PropertyDaoImpl implements PropertyDao {
 		int result = query.executeUpdate();
 
 	    
+	}
+
+	@Override
+	public void deactivate(int id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createSQLQuery("UPDATE Property SET active = 0 WHERE id =:id ");
+		query.setParameter("id", id);
+		int result = query.executeUpdate();
 	}
 
 	

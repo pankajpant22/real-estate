@@ -49,6 +49,8 @@ public class Property implements Serializable {
 	
 	private String type;
 	
+	private int active;
+	
 	@Column(name = "published_date")
 	private Date publishedDate;
 	
@@ -65,6 +67,14 @@ public class Property implements Serializable {
 	}
 
 					
+	public int getActive() {
+		return active;
+	}
+
+	public void setActive(int active) {
+		this.active = active;
+	}
+
 	public String getType() {
 		return type;
 	}

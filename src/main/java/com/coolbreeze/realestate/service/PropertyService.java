@@ -97,6 +97,11 @@ public class PropertyService {
 		propertyDao.insertProperty(map);
 	}
 
+	@Transactional
+	public void deactivate(int id) {
+		propertyDao.deactivate(id);
+	}
+
 	
 	
 	

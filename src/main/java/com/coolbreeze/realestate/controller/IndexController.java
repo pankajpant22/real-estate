@@ -1,5 +1,10 @@
 package com.coolbreeze.realestate.controller;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -8,6 +13,13 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+import org.joda.time.Hours;
+import org.joda.time.Minutes;
+import org.joda.time.Seconds;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.stereotype.Controller;
@@ -29,6 +41,56 @@ public class IndexController {
 	
 	@RequestMapping("/index")
 	public String index(Model model,@RequestParam(value = "page", defaultValue="0", required=false) int page){
+		
+		List<Property> propertyList = propertyService.findAll(page);
+		Iterator<Property> iterator = propertyList.iterator();
+		while (iterator.hasNext()) {
+			Property prop = (Property) iterator.next();
+			
+			if(prop.getSold() == 1)
+			{
+				DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String current = dateFormat.format(cal.getTime());
+				
+				Date d1=null;
+				Date d2=null;
+				
+				Date dateSold = prop.getDateSold();
+				String date = dateFormat.format(dateSold);
+				try {
+					d1 = dateFormat.parse(current);
+					d2=dateFormat.parse(date);
+					DateTime dt1 = new DateTime(d1);
+					DateTime dt2 = new DateTime(d2);
+					int days = Days.daysBetween(dt1, dt2).getDays();
+					//System.out.println(days+"days");
+					
+					if(days <= -3)
+					{
+						int id = prop.getId();
+						propertyService.deactivate(id);
+					}
+					
+//					System.out.println(Days.daysBetween(dt1, dt2).getDays()+"days");
+//					System.out.println(Hours.hoursBetween(dt1, dt2).getHours() %24 +"hours");
+//					System.out.println(Minutes.minutesBetween(dt1, dt2).getMinutes() %60 +"Minutes");
+//					System.out.println(Seconds.secondsBetween(dt1, dt2).getSeconds() %60 +"Seconds");
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
+			//if (i.next().getIsbn() == isbn) {
+
+		}
+		
+		
+//		DateTimeFormatter dtf = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+//		DateTime dt = new DateTime();
+//		
+//		System.out.println(dt);
+		
+		
 		model.addAttribute("propertyList",propertyService.findAll(page));
 		return ("home");
 	}

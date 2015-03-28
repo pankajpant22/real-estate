@@ -22,5 +22,6 @@ public interface PropertyDao {
 	public void updateProperty(int id, int s);
 	public void updateProperty(int id, int s, String dateSold, int userSoldId);
 	public void insertProperty(HashMap<String, String> map);
+	public void deactivate(int id);
 	
 }
