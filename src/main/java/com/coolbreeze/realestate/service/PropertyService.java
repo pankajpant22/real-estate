@@ -102,7 +102,12 @@ public class PropertyService {
 		propertyDao.deactivate(id);
 	}
 
-	
+	@Transactional
+	public List<Property> searchPropertySort(String sort, String properties) {
+		return propertyDao.searchPropertySort(sort,properties);
+	}
+
+
 	
 	
 }

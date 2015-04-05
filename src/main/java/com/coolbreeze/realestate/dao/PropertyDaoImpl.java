@@ -243,6 +243,18 @@ public class PropertyDaoImpl implements PropertyDao {
 		int result = query.executeUpdate();
 	}
 
-	
+	@Override
+	public List<Property> searchPropertySort(String sort, String properties) {
+		String prices = properties;
+		String test = prices.substring(0,prices.length()-1);
+		String testFinal = test.substring(0);
+		
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createSQLQuery("Select * from Property "
+				+ "where price in (:properties) ORDER BY price "+sort);
+		query.setParameter("properties", testFinal);	
+		List<Property> propertyList = query.list();
+		return propertyList;
+	}
 	
 }

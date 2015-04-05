@@ -95,25 +95,9 @@
 			</div>
 		</div>
 		<div id="content">
-			<!--
-			<form action="/sort.html" method="post">
-			<div class="filter">
-				<h1 class="osLight">Sort your results</h1>
-				<input type="hidden" name="data" 
-					value="<c:forEach items="${propertyList}" var="property">
-					${property.price},</c:forEach>">
-				<select id = "sType" name="sType" class="form-control">
-								<option value="DESC">Descending</option>
-								<option value="ASC">Ascending</option>
-				</select>
-				<br>
-				<input type="submit" class="btn btn-default sortBtn" value="Submit" />
-				<div class="clearfix"></div>
+			
 			<br>
-			</div>
-			</form>
-			-->
-			<h1 class="osLight">Search Result</h1>
+			<br>
 			<div class="resultsList">
 
 				<div class="row">

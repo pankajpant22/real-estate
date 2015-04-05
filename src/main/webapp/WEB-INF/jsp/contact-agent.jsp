@@ -133,7 +133,7 @@
 
 	<div class="home-wrapper">
 		<br> <br>
-		<h2>Contact Agent</h2>
+		<h2>Contact Seller</h2>
 		<span style="color:green; font-weight: bold;">${message}</span>
 		
 		<hr>
