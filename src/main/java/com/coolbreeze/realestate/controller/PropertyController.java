@@ -39,6 +39,11 @@ public class PropertyController {
 	@RequestMapping("/property/{id}")
 	public String detailProperty(Model model,@PathVariable int id )
 	{
+		Property property = propertyService.find(id);
+		User user= property.getUser();
+		String name = user.getUserName();
+		String sellerName = name.substring(0, 1).toUpperCase() + name.substring(1);
+		model.addAttribute("sellerName", sellerName);
 		model.addAttribute("property", propertyService.find(id));
 		return "property-detail";
 	}

@@ -152,7 +152,7 @@
                 <div class="agentAvatar summaryItem">
                     <div class="clearfix"></div>
                     <img class="avatar agentAvatarImg" src="images/avatar-2.png" alt="avatar">
-                    <div class="agentName">Jane Smith</div>
+                    <div class="agentName">Seller Name : ${sellerName}</div>
                     <a data-toggle="modal" href='<spring:url value="/property/contactAgent/${property.id}.html"/>' 
                     class="btn btn-lg btn-round btn-green contactBtn isThemeBtn">Contact Seller</a>
                 </div>
