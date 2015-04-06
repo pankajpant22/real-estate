@@ -57,36 +57,53 @@
 <script src="js/jquery.visible.js"></script>
 <script src="js/home.js" type="text/javascript"></script>
 
-
-<script type="text/javascript"
-	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-
 <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<style>
+.form-signin {
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
 
-<script type="text/javascript">
-	$(document)
-			.ready(
-					function() {
-						$('.contactForm')
-								.validate(
-										{
-											rules : {
-												email : {
-													required : true,
-													email : true
-												},
-												username : {
-													required : true
-												}
-											}
-										});
+.form-signin .form-signin-heading, .form-signin .checkbox {
+	margin-bottom: 10px;
+}
 
-					});
-</script>
+.form-signin .checkbox {
+	font-weight: normal;
+}
+
+.form-signin .form-control {
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+	z-index: 2;
+}
+
+.form-signin input[type="email"] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+</style>
+
 
 </head>
 <body class="notransition no-hidden">
@@ -100,8 +117,6 @@
 				class="fa fa-bars"></span></a>
 			<div class="home-nav">
 				<ul>
-					<li style="font-size: 200%; color: red;">Welcome ${name}</li>
-
 					<li><a href='<spring:url value="/"/>'
 						class="btn btn-green isThemeBtn">Home</a></li>
 					<security:authorize access="hasRole('ROLE_ADMIN')">
@@ -132,74 +147,17 @@
 	<!-- Content -->
 
 	<div class="home-wrapper">
-		<br> <br>
-		<h2>Contact Seller</h2>
-		<span style="color:green; font-weight: bold;">${message}</span>
-		
+	<br>
+	<br>
+	
 		<hr>
-		<!--Start Contact form -->
-		<form role="form" class = "contactForm" method="post">
-    		<div class="form-group">
-      			<label for="name">Property Name:</label>
-      			&nbsp;&nbsp;
-      			<label for="name">${property.name}</label>
-      		</div>
-    		<div class="form-group">
-      			<label for="address">Property Address:</label>
-      			&nbsp;&nbsp;
-      			<label for="address">${property.address}</label>
-      		</div>
-      		<div class="form-group">
-      			<label for="price">Property Price:</label>
-      			&nbsp;&nbsp;
-      			<label for="price">$ ${property.price}</label>
-      		</div>
-      		<div class="form-group">
-      			<label for="username">Contact User Name (Required):</label>
-      			<input type="username" class="form-control" id="username" name = "username" placeholder="Enter User Name">
-    		</div>
-    		<div class="form-group">
-      			<label for="email">Contact Email:</label>
-      			<input type="email" class="form-control" id="email" name = "email" placeholder="Enter email">
-    		</div>
-    		<div class="form-group">
-      		<label for="message">Any Message (Optional)</label>
-      		<input type="text" class="form-control" id="msg" name="msg" placeholder="Message">
-    		</div>
-    		<input type="hidden" name = "seller_email" value="${user.email}"/>
-    		<input type="submit" class="btn btn-default" value="Submit"/>
-  		</form>
-		<!--End Contact form -->
-		<!--  Paypal -->
-		<hr>
+		<br>
+		<h2 style ="color:green;"> Thank You for Your Payment</h2>
 		
-		<form action="${initParam['posturl']}" method = "post">
-			<input type="hidden" name = "upload" value = "1"/>
-			<input type="hidden" name = "return" value = "${initParam['returnurl']}"/>
-			<input type="hidden" name = "cmd" value = "_cart"/>
-			<input type="hidden" name = "business" value = "${initParam['business']}"/>
-		
-			<!-- Product 1 -->
-			<input type="hidden" name = "item_name_1" value = "Product 1"/>
-			<input type="hidden" name = "item_number_1" value = "Token"/>
-			<input type="hidden" name = "quantity_1" value = "1"/>
-		<table>
-			<tr>
-				<td>Pay the Token Money :</td>
-				<td><input type="text" name = "amount_1" /></td>
-			</tr>
-			<tr>
-				<td></td>
-				<td><input type="image" src = "
-			https://www.paypal.com/en_US/i/btn/btn_xpressCheckout.gif"/>
-				</td>
-			</tr>
-		
-		</table>
-		 
-		</form>
-		
-
+		<br>
+	<br><br>
+	<br><br>
+	<br>
 	</div>
 
 	<!-- Footer -->
@@ -240,3 +198,5 @@
 
 </body>
 </html>
+
+
