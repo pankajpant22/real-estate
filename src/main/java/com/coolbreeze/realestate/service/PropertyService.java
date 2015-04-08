@@ -26,6 +26,10 @@ public class PropertyService {
 	@Autowired
 	private PropertyDao propertyDao;
 	
+	@Autowired
+	private UserDao userDao;
+	
+	
 //	@Autowired
 //	private PropertyRepository propertyRepository;
 	
@@ -93,8 +97,10 @@ public class PropertyService {
 	}
 
 	@Transactional
-	public void insertProperty(HashMap<String, String> map) {
-		propertyDao.insertProperty(map);
+	public void insertProperty(HashMap<String, String> map, String username) {
+		User user = userDao.findOne(username);
+		int userId = user.getUserId();
+		propertyDao.insertProperty(map,userId);
 	}
 
 	@Transactional
@@ -107,6 +113,11 @@ public class PropertyService {
 		return propertyDao.searchPropertySort(sort,properties);
 	}
 
+	public List<Property> findByUserId(int userId) {
+		return propertyDao.findByUserId(userId);
+	}
+
+	
 
 	
 	

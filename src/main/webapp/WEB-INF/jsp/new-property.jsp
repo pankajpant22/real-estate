@@ -28,45 +28,63 @@
 <link href="css/fullscreen-slider.css" rel="stylesheet">
 <link href="css/bootstrap.css" rel="stylesheet">
 <link href="css/app.css" rel="stylesheet" id="app">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<link rel="stylesheet" media="all" type="text/css"
-	href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" />
-
-<link rel="stylesheet" media="all" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css
-" />
-
-
-
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/bootstrap.js"></script>
 
 <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-
 <script type="text/javascript">
-	$(document).ready(function() {
-		$("#dtBox").DateTimePicker();
-
-		$('.updateProperty').validate({
+$(document).ready(function() {
+	
+	$('.newProperty').validate({
 			rules : {
-				userSold : {
-					required : true
-				}
-			}
-		});
+						name : {
+								required : true
+								},
+						address : {
+								required : true,
+								maxlength: 50 
+								},
+						description : {
+								required : true,
+								minlength : 5,
+								maxlength : 250
+								},
+						city : {
+								required : true
+								},
+						zip : {
+								required : true
+								},
+						price : {
+								required : true,
+								number: true,
+								maxlength: 8
+								},
+						lat : {
+								required : true,
+								number: true
+								},
+						lng : {
+								required : true,
+								number: true
+								}
+				},
+				
+			highlight : function(element) {$(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+											},
+			unhighlight : function(element) {$(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+											},
+
 	});
+
+});
 </script>
+
+
 </head>
 <body class="notransition no-hidden">
 
@@ -81,8 +99,6 @@
 				class="fa fa-bars"></span></a>
 			<div class="home-nav">
 				<ul>
-					<li style="font-size: 200%; color: red;">Welcome ${name}</li>
-
 					<li><a href='<spring:url value="/"/>'
 						class="btn btn-green isThemeBtn">Home</a></li>
 					<security:authorize access="hasRole('ROLE_ADMIN')">
@@ -114,74 +130,114 @@
 
 	<div class="home-wrapper">
 		<br> <br>
-		<h2>Update Property</h2>
+		<h2>${user.userName} New Property</h2>
 		<span style="color: green; font-weight: bold;">${message}</span>
-
 		<hr>
-		<!--Start Contact form -->
-		<form class="form-horizontal updateProperty" method="post">
+		<form:form  cssClass="form-horizontal newProperty" id="form">
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Property Name</label>
+				<label for="name" class="col-sm-2 control-label">Property Name:
+				</label>
 				<div class="col-sm-10">
-					<p class="form-control-static">${property.name}</p>
+					<input type="text" name = "name" class="form-control" id="name" placeholder="Property Name" >
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Property Address</label>
+				<label for="address" class="col-sm-2 control-label">Address(max:50 character):
+				</label>
 				<div class="col-sm-10">
-					<p class="form-control-static">${property.address}</p>
+					<input type="text" name = "address" class="form-control" id="address" placeholder="Property Address" >
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Message Recieved</label>
+				<label for="description" class="col-sm-2 control-label">Description(max:250 character):
+				</label>
 				<div class="col-sm-10">
-					<p class="form-control-static">${property.message}</p>
+					<input type="text" name = "description" class="form-control" id="description" placeholder="Property Description" >
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Sold</label>
-				<div class="col-sm-offset-2 col-sm-10">
-					<div class="checkbox">
-						<c:choose>
-							<c:when test="${property.sold == 1}">
-								<label> <input name="sold" value="1" type="checkbox" checked>Sold</label> 
-								<label> <input name="sold" value="0" type="checkbox">Not Sold</label>	
-      						</c:when>
-							<c:otherwise>
-								<label> <input name="sold" value="1" type="checkbox">Sold</label> 
-								<label> <input name="sold" value="0" type="checkbox" checked>Not Sold</label>	
-      						</c:otherwise>
-						</c:choose>
-						
-					</div>
-				</div>
-
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Date Sold</label>
+				<label for="city" class="col-sm-2 control-label">City:
+				</label>
 				<div class="col-sm-10">
-					<input type="text" name="dateSold" data-field="datetime"
-						placeholder="Date Sold" value="${property.dateSold}" readonly>
+					<input type="text" name = "city" class="form-control" id="city" placeholder="City" >
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-sm-2 control-label">Sold to (User Name)</label>
+				<label for="zip" class="col-sm-2 control-label">Zip:
+				</label>
 				<div class="col-sm-10">
-					<input type="text" name="userSold" placeholder="Sold to User" >
+					<input type="text" name = "zip" class="form-control" id="zip" placeholder="Zip" pattern="[A-Za-z]">
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<input type="submit" class="btn btn-default" value="Update" />
-				</div>
+					    <label for="bedno" class="col-sm-2 control-label">Bedroom</label>
+					    <div class="col-sm-10">
+					      <select  name = "bed" class="form-control">
+							  <option>1</option>
+							  <option>2</option>
+							  <option>3</option>
+							  <option>4</option>
+							  <option>5</option>
+						  </select>
+					    </div>
 			</div>
-			<div id="dtBox"></div>
-
-		</form>
-
-
+			<div class="form-group">
+					    <label for="bath" class="col-sm-2 control-label">Bathroom</label>
+					    <div class="col-sm-10">
+					      <select name = "bath" class="form-control">
+							  <option>1</option>
+							  <option>2</option>
+							  <option>3</option>
+							  <option>4</option>
+							  <option>5</option>
+						  </select>
+					    </div>
+			</div>
+			<div class="form-group">
+					    <label for="price" class="col-sm-2 control-label">Price</label>
+					    <div class="col-sm-10">
+					      <input type="text" name = "price" class="form-control" id="price" placeholder="Price">
+					    </div>
+			</div>
+			Use <a href="http://www.latlong.net/"><u>http://www.latlong.net/</u></a> for Latitude and Longitude
+			<div class="form-group">
+					    <label for="lat" class="col-sm-2 control-label">Latitude</label>
+					    <div class="col-sm-10">
+					      <input type="text" name = "lat" class="form-control" id="lat" placeholder="Latitude">
+					    </div>
+			</div>
+			<div class="form-group">
+					    <label for="lng" class="col-sm-2 control-label">Longitude</label>
+					    <div class="col-sm-10">
+					      <input type="text" name = "lng" class="form-control" id="lng" placeholder="Longitude">
+					    </div>
+			</div>
+			<div class="form-group">
+					    <label for="bath" class="col-sm-2 control-label">Type</label>
+					    <div class="col-sm-10">
+					      <select name = "type" class="form-control">
+							  <option>Resident</option>
+							  <option>Condo</option>
+						  </select>
+					    </div>
+			</div>
+			<div class="form-group">
+					    <label for="bath" class="col-sm-2 control-label">Nearby Facility</label>
+					    <div class="col-sm-10">
+					      <select name = "facility" class="form-control">
+							  <option value = "shopping">Shopping centers</option>
+							  <option value="metro">Metro</option>
+							  <option value="bus">Bus</option>
+							  <option value="schools">Schools</option>
+							  <option value="hospitals">Hospitals</option>
+						  </select>
+					    </div>
+			</div>
+			<div class="modal-footer">
+					<input type="submit" value="Submit" class="btn btn-primary">
+			</div>
+		</form:form>
 	</div>
-
 	<!-- Footer -->
 
 	<div class="home-footer">
@@ -218,8 +274,6 @@
 		</div>
 	</div>
 
-	<!-- Latest compiled and minified JavaScript -->
-
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/jquery-ui-touch-punch.js"></script>
@@ -233,20 +287,13 @@
 	<script src="js/infobox.js"></script>
 	<script src="js/jquery.visible.js"></script>
 	<script src="js/home.js" type="text/javascript"></script>
-	<link rel="stylesheet" type="text/css" href="css/DateTimePicker.css" />
-	<script type="text/javascript" src="js/DateTimePicker.js"></script>
-
-
-	<script type="text/javascript"
-		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-<script type="text/javascript">
-		$(document).ready(function() {
-			$('.checkbox input').on('change', function() {
-				$('.checkbox input').not(this).prop('checked', false);
-			});
-
-		});
-	</script>
+<script type="text/javascript"
+	src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
 
 </body>
 </html>
+
+
+
+
+

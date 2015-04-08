@@ -93,9 +93,11 @@
 
 	<div>
 		<div class="home-header">
-			<div class="home-logo osLight">
+			<a href='<spring:url value="/"/>'>
+        	<div class="home-logo osLight">
 				<span class="glyphicon glyphicon-home" aria-hidden="true"></span>iWebEstate
 			</div>
+			</a>
 			<a href="#" class="home-navHandler visible-xs"><span
 				class="fa fa-bars"></span></a>
 			<div class="home-nav">

@@ -71,8 +71,7 @@
 	$(document)
 			.ready(
 					function() {
-						$('.registrationForm')
-								.validate(
+						$('.registrationForm').validate(
 										{
 											rules : {
 												userName : {
@@ -134,7 +133,9 @@
 	<div>
 		<div class="home-header">
 			<div class="home-logo osLight">
-				<span class="glyphicon glyphicon-home" aria-hidden="true"></span>iWebEstate
+			<a href='<spring:url value="/"/>'>
+        		<span class="glyphicon glyphicon-home" aria-hidden="true"></span>iWebEstate
+			</a>
 			</div>
 			<a href="#" class="home-navHandler visible-xs"><span
 				class="fa fa-bars"></span></a>

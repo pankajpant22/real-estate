@@ -46,6 +46,7 @@
 			$('#propertyRemove').modal();
 		});
 		
+		
 		$('.newProperty').formValidation({
 	        framework: 'bootstrap',
 	        icon: {
@@ -137,7 +138,9 @@
 	<div>
 		<div class="home-header">
 			<div class="home-logo osLight">
-				<span class="glyphicon glyphicon-home" aria-hidden="true"></span>iWebEstate
+			<a href='<spring:url value="/"/>'>
+        		<span class="glyphicon glyphicon-home" aria-hidden="true"></span>iWebEstate
+			</a>
 			</div>
 			<a href="#" class="home-navHandler visible-xs"><span
 				class="fa fa-bars"></span></a>
@@ -174,13 +177,14 @@
 
 	<div class="home-wrapper">
 		<br> <br>
-		<h2>${user.userName}Properties Listing</h2>
+		<h2>${user.userName}Properties Listing
+		<!-- <a href="javascript:void(0);"><img id="settings" alt="settings" src="images/settings-icon.png"></a> --> 
+		</h2>
 		<hr>
 		<span style="color: green; font-weight: bold;">${message}</span>
 		<security:authorize access="hasRole('ROLE_SELLER')">
-			<!-- Button trigger modal -->
-			<button type="button" class="btn btn-primary btn-lg"
-				data-toggle="modal" data-target="#myModal">New Property</button>
+			<a href='<spring:url value="/account/new.html"/>'><button type="button" class="btn btn-primary btn-lg"
+				data-toggle="modal" data-target="#myModal">New Property</button></a>
 		</security:authorize>
 		<hr>
 		<table class="table table-bordered table-hover table-striped">
@@ -194,19 +198,26 @@
 					<security:authorize access="hasRole('ROLE_SELLER')">
 					<th>Published Date</th>
 					<th>Messages</th>
+					</security:authorize>
 					<th>Sold</th>
 					<th>Date Sold</th>
-					</security:authorize>
+					<security:authorize access="hasRole('ROLE_SELLER')">
 					<th>Action</th>
+					</security:authorize>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach items="${user.properties}" var="prop">
 					<tr id="tr_id_1" class="tr-class-1">
+						<security:authorize access="hasAnyRole('ROLE_SELLER','ROLE_ADMIN')">
 						<td id="td_id_1" class="td-class-1"><a
 							href='<spring:url value="/property/update/${prop.id}.html"/>'>
 								<c:out value="${prop.name}" />
 						</a></td>
+						</security:authorize>
+						<security:authorize access="hasRole('ROLE_BUYER')">
+						<td><c:out value="${prop.name}" /></td>
+						</security:authorize>
 						<td>${prop.address}</td>
 						<td>${prop.city}</td>
 						<td>$${prop.price}</td>
@@ -215,6 +226,7 @@
 						<security:authorize access="hasRole('ROLE_SELLER')">
 						<td>${prop.publishedDate}</td>
 						<td>${prop.message}</td>
+						</security:authorize>
 						<c:choose>
 							<c:when test="${prop.sold =='1'}">
 								<td><img alt="sold" src="images/right.png"></td>
@@ -224,11 +236,11 @@
 							</c:otherwise>
 						</c:choose>
 						<td>${prop.dateSold}</td>
-						</security:authorize>
+						<security:authorize access="hasRole('ROLE_SELLER')">
 						<td><a
-							href='<spring:url value="/admin/property/delete/${prop.id}.html"/>'
+							href='<spring:url value="/account/property/delete/${prop.id}.html"/>'
 							class="btn btn-danger propertyRemoveTrigger">Remove</a></td>
-
+						</security:authorize>
 					</tr>
 				</c:forEach>
 			</tbody>
@@ -294,130 +306,6 @@
 		</div>
 	</div>
 
-
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" tabindex="-1" role="dialog"
-		aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<h4 class="modal-title" id="myModalLabel">New Property</h4>
-				</div>
-				<div class="modal-body">
-					<form class="form-horizontal newProperty" method="post">
-					  <div class="form-group">
-					    <label for="name" class="col-sm-2 control-label">Name</label>
-					    <div class="col-sm-10">
-					      <input type="text" name = "name" class="form-control" id="name" placeholder="Name" required>
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="address" class="col-sm-2 control-label">Address</label>
-					    <div class="col-sm-10">
-					      <input type="address" name = "address" class="form-control" id="address" placeholder="Address" required>
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="description" class="col-sm-2 control-label">Short Description</label>
-					    <div class="col-sm-10">
-					      <input type="description" name = "description" class="form-control" id="description" 
-					      placeholder="description" required>
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="city" class="col-sm-2 control-label">City</label>
-					    <div class="col-sm-10">
-					      <input type="city"  name = "city" class="form-control" id="city" 
-					      placeholder="City" required>
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="zip" class="col-sm-2 control-label">Zip</label>
-					    <div class="col-sm-10">
-					      <input type="zip" name = "zip" class="form-control" id="zip" placeholder="Zip" required>
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="bedno" class="col-sm-2 control-label">Bedroom</label>
-					    <div class="col-sm-10">
-					      <select  name = "bed" class="form-control">
-							  <option>1</option>
-							  <option>2</option>
-							  <option>3</option>
-							  <option>4</option>
-							  <option>5</option>
-						  </select>
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="bath" class="col-sm-2 control-label">Bathroom</label>
-					    <div class="col-sm-10">
-					      <select name = "bath" class="form-control">
-							  <option>1</option>
-							  <option>2</option>
-							  <option>3</option>
-							  <option>4</option>
-							  <option>5</option>
-						  </select>
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="price" class="col-sm-2 control-label">Price</label>
-					    <div class="col-sm-10">
-					      <input type="price"  name = "price" class="form-control" id="price" placeholder="Price" required>
-					    </div>
-					  </div>
-					   Use <a href="http://www.latlong.net/"><u>http://www.latlong.net/</u></a> for Latitude and Longitude
-					  <div class="form-group">
-					    <label for="lat" class="col-sm-2 control-label">latitude</label>
-					    <div class="col-sm-10">
-					      <input type="lat" name = "lat" class="form-control" id="lat" placeholder="Latitude" required>
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="lng" class="col-sm-2 control-label">Longitude</label>
-					    <div class="col-sm-10">
-					      <input type="lng" name = "lng" class="form-control" id="lng" placeholder="Longitude" required>
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="bath" class="col-sm-2 control-label">Type</label>
-					    <div class="col-sm-10">
-					      <select name = "type" class="form-control">
-							  <option>Resident</option>
-							  <option>Condo</option>
-						  </select>
-					    </div>
-					  </div>
-					  <div class="form-group">
-					    <label for="bath" class="col-sm-2 control-label">Nearby Facility</label>
-					    <div class="col-sm-10">
-					      <select name = "facility" class="form-control">
-							  <option value = "shopping">Shopping centers</option>
-							  <option value="metro">Metro</option>
-							  <option value="bus">Bus</option>
-							  <option value="schools">Schools</option>
-							  <option value="hospitals">Hospitals</option>
-						  </select>
-					    </div>
-					  </div>
-					 <div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<input type="submit" value="Submit" class="btn btn-primary">
-				</div>
-				</form> 
-				</div>
-				
-			</div>
-		</div>
-	</div>
-
-
-
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/jquery-ui-touch-punch.js"></script>
@@ -431,7 +319,6 @@
 	<script src="js/infobox.js"></script>
 	<script src="js/jquery.visible.js"></script>
 	<script src="js/home.js" type="text/javascript"></script>
-
 
 </body>
 </html>

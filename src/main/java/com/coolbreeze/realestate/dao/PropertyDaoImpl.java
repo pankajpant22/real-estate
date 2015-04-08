@@ -193,23 +193,22 @@ public class PropertyDaoImpl implements PropertyDao {
 		int result = query.executeUpdate();
 	}
 
+
 	@Override
-	public void insertProperty(HashMap<String, String> map) {
+	public void insertProperty(HashMap<String, String> map, int userId) {
 		Session session = this.sessionFactory.getCurrentSession();
 		String bed = map.get("bedroom");
 		int bedno = Integer.valueOf(bed);
 		String bath = map.get("bathroom");
 		int bathno = Integer.valueOf(bath);
 		String price = map.get("price");
-		int priceno = Integer.valueOf(price);
-		String userId=map.get("userId");
-		int user_id = Integer.valueOf(userId);
+		String priceint= price.replace(",", "");
+		int priceno = Integer.valueOf(priceint);
 		
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Date date = new Date();
 		String current = dateFormat.format(date);
 		String dateFinal = current.replaceAll("[:\\s-]+", "");
-		
 		
 		Query query = session.createSQLQuery("INSERT INTO Property "
 				+ "(address,city,name,price,published_date,zip,user_id,bathroom,bedroom,description,lat,lng,message,sold,dateSold,type,facility) "
@@ -221,7 +220,7 @@ public class PropertyDaoImpl implements PropertyDao {
 		query.setParameter("price", priceno);
 		query.setParameter("current", dateFinal);
 		query.setParameter("zip", map.get("zip"));
-		query.setParameter("userId", user_id);
+		query.setParameter("userId", userId);
 		query.setParameter("bathroom", bathno);
 		query.setParameter("bedroom", bedno);
 		query.setParameter("description", map.get("description"));
@@ -229,10 +228,7 @@ public class PropertyDaoImpl implements PropertyDao {
 		query.setParameter("lng",map.get("lng"));
 		query.setParameter("type", map.get("type"));
 		query.setParameter("facility", map.get("facility"));
-		
 		int result = query.executeUpdate();
-
-	    
 	}
 
 	@Override

@@ -21,7 +21,7 @@ public interface PropertyDao {
 	public List<Property> searchPropertyMap(HashMap<String, String> map);
 	public void updateProperty(int id, int s);
 	public void updateProperty(int id, int s, String dateSold, int userSoldId);
-	public void insertProperty(HashMap<String, String> map);
+	public void insertProperty(HashMap<String, String> map, int userId);
 	public void deactivate(int id);
 	public List<Property> searchPropertySort(String sort, String properties);
 	

@@ -5,6 +5,7 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,16 +42,22 @@ public class LoginController {
 		Random rand = new Random();
 		Long number = rand.nextLong();
 	    String randomNum = number.toString();
-	    boolean result= userService.updateUser(email,randomNum);
+	    
+	    BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String password = encoder.encode(randomNum);
+	    
+	    boolean result= userService.updateUser(email,password);
 	    if(result == false)
 	    {
-	    	redirectAttributes.addFlashAttribute("message", "No Such Email !!!");
+	    	redirectAttributes.addFlashAttribute("message", "No Such Email Registered !!!");
 			return "redirect:/forgotPassword.html";
 	    }
 	    
 	    String message = "Your Password is: "+randomNum;
 	    
 	    mailService.sendMail(email, "Your Login Password", message);
+	    
+	    //System.out.println(encoder.encode("pankaj"));
 	    
 		redirectAttributes.addFlashAttribute("message", "Send Email with Password !!!");
 		return "redirect:/forgotPassword.html";

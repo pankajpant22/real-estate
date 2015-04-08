@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -123,4 +124,50 @@ public class PropertyController {
 		redirectAttributes.addFlashAttribute("message", "Property Updated!!!");
 		return "redirect:/property/update/{id}.html";
 	}
+	
+	
+	@RequestMapping("/account/new")
+	public String account(Model model, Principal principal ){
+		String name = principal.getName();
+		return "new-property";
+	}
+	
+	@RequestMapping(value="/account/new",method=RequestMethod.POST)
+	public String saveProperty(Model model,
+			Principal principal, HttpServletRequest request,final RedirectAttributes redirectAttributes ){
+		String username= principal.getName();
+		
+		String name = request.getParameter("name");
+		String address = request.getParameter("address");
+		String description = request.getParameter("description");
+		String city = request.getParameter("city");
+		String zip = request.getParameter("zip");
+		String bed = request.getParameter("bed");
+		String bath= request.getParameter("bath");
+		String lat = request.getParameter("lat");
+		String lng = request.getParameter("lng");
+		String type = request.getParameter("type");
+		String facility = request.getParameter("facility");
+		String price = request.getParameter("price");
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("name", name);
+		map.put("address", address);
+		map.put("description", description);
+		map.put("city", city);
+		map.put("zip", zip);
+		map.put("bedroom", bed);
+		map.put("bathroom", bath);
+		map.put("lat", lat);
+		map.put("lng", lng);
+		map.put("type", type);
+		map.put("facility", facility);
+		map.put("price", price);
+		
+		propertyService.insertProperty(map,username);
+		redirectAttributes.addFlashAttribute("message", "Property Added!!!");
+		return "redirect:/account/new.html";
+	}
+	
+	
 }

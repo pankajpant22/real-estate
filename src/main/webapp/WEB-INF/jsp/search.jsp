@@ -48,7 +48,9 @@
 		<div class="logo">
 			<a href="index.html">
 				<div class="home-logo osLight">
-					<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+				<a href='<spring:url value="/"/>'>
+        			<span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+				</a>
 				</div>
 			</a>
 		</div>

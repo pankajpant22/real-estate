@@ -1,6 +1,8 @@
 package com.coolbreeze.realestate.controller;
 
 import java.security.Principal;
+import java.util.Iterator;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.coolbreeze.realestate.entity.Property;
 import com.coolbreeze.realestate.entity.User;
 import com.coolbreeze.realestate.service.PropertyService;
 import com.coolbreeze.realestate.service.UserService;
@@ -33,7 +36,17 @@ public class AdminController {
 
 	@RequestMapping("/admin/user/delete/{userId}")
 	public String deleteUser(Model model,@PathVariable int userId)
-	{	userService.delete(userId);
+	{	
+		List<Property> propertyList = propertyService.findByUserId(userId);
+		Iterator<Property> it = propertyList.iterator();
+		while(it.hasNext())
+		{
+			Property prop = (Property) it.next();
+			int id = prop.getId();
+			propertyService.delete(id);
+		}
+		
+		userService.delete(userId);
 		return "redirect:/admin.html";
 	}
 	
