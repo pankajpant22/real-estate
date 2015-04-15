@@ -71,7 +71,8 @@
 	$(document)
 			.ready(
 					function() {
-						$('.registrationForm').validate(
+						$('.registrationForm')
+								.validate(
 										{
 											rules : {
 												userName : {
@@ -133,9 +134,9 @@
 	<div>
 		<div class="home-header">
 			<div class="home-logo osLight">
-			<a href='<spring:url value="/"/>'>
-        		<span class="glyphicon glyphicon-home" aria-hidden="true"></span>iWebEstate
-			</a>
+				<a href='<spring:url value="/"/>'> <span
+					class="glyphicon glyphicon-home" aria-hidden="true"></span>iWebEstate
+				</a>
 			</div>
 			<a href="#" class="home-navHandler visible-xs"><span
 				class="fa fa-bars"></span></a>
@@ -212,7 +213,7 @@
 			<div class="form-group">
 				<label for="Role" class="col-sm-2 control-label">Role: </label>
 				<div class="col-sm-10">
-					<input type="radio" name="role" value="ROLE_SELLER" >Seller
+					<input type="radio" name="role" value="ROLE_SELLER">Seller
 					<input type="radio" name="role" value="ROLE_BUYER" checked>Buyer
 				</div>
 			</div>
@@ -225,38 +226,42 @@
 		</form:form>
 	</div>
 
-<!-- Footer -->
+	<!-- Footer -->
 
-<div class="home-footer">
-    <div class="home-wrapper">
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                <div class="osLight footer-header">Real Estate Information</div>
-                <ul class="footer-nav pb20">
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Team</a></li>
-                    <li><a href="#">Terms & Privacy</a></li>
-                </ul>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <div class="osLight footer-header">Get in Touch: Dipesh Walia</div>
-                <ul class="footer-nav pb20">
-                    <li class="footer-phone"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> 438 402 52 02</li>
-                    <li class="footer-address osLight">
-                        <p>7141 Sherbrooke Street West</p>
-                        <p>Montreal, Quebec H4B 1R6</p>
-                        <p>Canada</p>
-                    </li>
-                </ul>
-            </div>
-            
-        </div>
-        <div class="copyright">iWebEstate Real estate Online application<br> &copy; CoolBreeze 2015</div>
-    </div>
-</div>
+	<div class="home-footer">
+		<div class="home-wrapper">
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+					<div class="osLight footer-header">Real Estate Information</div>
+					<ul class="footer-nav pb20">
+						<li><a href='<spring:url value="/about.html"/>'>About</a></li>
+						<li><a href='<spring:url value="/team.html"/>'>Team</a></li>
+						<li><a href='<spring:url value="/terms.html"/>'>Terms &
+								Privacy</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3"></div>
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+					<div class="osLight footer-header">Get in Touch: Dipesh Walia</div>
+					<ul class="footer-nav pb20">
+						<li class="footer-phone"><span
+							class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+							438 402 52 02</li>
+						<li class="footer-address osLight">
+							<p>7141 Sherbrooke Street West</p>
+							<p>Montreal, Quebec H4B 1R6</p>
+							<p>Canada</p>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+			<div class="copyright">
+				iWebEstate Real estate Online application<br> &copy; CoolBreeze
+				2015
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>

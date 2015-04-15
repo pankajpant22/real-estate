@@ -13,7 +13,9 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <title>real estate web application</title>
-<link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+<link
+	href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css"
+	rel="stylesheet">
 <link href="css/font-awesome.css" rel="stylesheet">
 <link href="css/simple-line-icons.css" rel="stylesheet">
 <link href="css/fullscreen-slider.css" rel="stylesheet">
@@ -22,7 +24,9 @@
 <script src="js/jquery-2.1.1.min.js"></script>
 <script src="js/jquery-ui.min.js"></script>
 <script src="js/bootstrap.js"></script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css" rel="stylesheet"/>
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.3.0/css/font-awesome.css"
+	rel="stylesheet" />
 
 
 <!--[if lt IE 9]>
@@ -31,20 +35,20 @@
     <![endif]-->
 
 <script type="text/javascript">
-		$(document).ready(function() {
-			$('.triggerRemoveUser').click(function(e) {
-				e.preventDefault();
-				$("#userRemove .removeBtn").attr("href", $(this).attr("href"));
-				$('#userRemove').modal();
-			});
-			
-			$('.propertyRemoveTrigger').click(function(e){
-				e.preventDefault();
-				$("#propertyRemove .removeBtn").attr("href", $(this).attr("href"));
-				$('#propertyRemove').modal();
-			});
-
+	$(document).ready(function() {
+		$('.triggerRemoveUser').click(function(e) {
+			e.preventDefault();
+			$("#userRemove .removeBtn").attr("href", $(this).attr("href"));
+			$('#userRemove').modal();
 		});
+
+		$('.propertyRemoveTrigger').click(function(e) {
+			e.preventDefault();
+			$("#propertyRemove .removeBtn").attr("href", $(this).attr("href"));
+			$('#propertyRemove').modal();
+		});
+
+	});
 </script>
 
 
@@ -54,9 +58,9 @@
 	<div>
 		<div class="home-header">
 			<div class="home-logo osLight">
-			<a href='<spring:url value="/"/>'>
-        		<span class="glyphicon glyphicon-home" aria-hidden="true"></span>iWebEstate
-			</a>
+				<a href='<spring:url value="/"/>'> <span
+					class="glyphicon glyphicon-home" aria-hidden="true"></span>iWebEstate
+				</a>
 			</div>
 			<a href="#" class="home-navHandler visible-xs"><span
 				class="fa fa-bars"></span></a>
@@ -99,9 +103,11 @@
 			<!-- Nav tabs -->
 			<ul class="nav nav-tabs" role="tablist">
 				<li role="presentation" class="active"><a href="#home"
-					aria-controls="home" role="tab" data-toggle="tab" style="font-weight:bold; margin:15px;">Users</a></li>
+					aria-controls="home" role="tab" data-toggle="tab"
+					style="font-weight: bold; margin: 15px;">Users</a></li>
 				<li role="presentation"><a href="#profile"
-					aria-controls="profile" role="tab" data-toggle="tab" style="font-weight:bold; margin:15px;">Properties</a></li>
+					aria-controls="profile" role="tab" data-toggle="tab"
+					style="font-weight: bold; margin: 15px;">Properties</a></li>
 			</ul>
 
 			<!-- Tab panes -->
@@ -119,14 +125,12 @@
 						<tbody>
 							<c:forEach items="${userList}" var="user">
 								<tr id="tr_id_1" class="tr-class-1">
-									<td id="td_id_1" class="td-class-1">
-										<c:out value="${user.userName}" />
-									</td>
+									<td id="td_id_1" class="td-class-1"><c:out
+											value="${user.userName}" /></td>
 									<td><a
-										href='<spring:url value="/users/${user.userId}.html"/>'>
-										<c:out value = "${user.email}" />
-										</a>
-									</td>
+										href='<spring:url value="/users/${user.userId}.html"/>'> <c:out
+												value="${user.email}" />
+									</a></td>
 									<td>${user.password}</td>
 									<td><a
 										href='<spring:url value="/admin/user/delete/${user.userId}.html"/>'
@@ -193,7 +197,7 @@
 		</div>
 	</div>
 
-<!-- Modal -->
+	<!-- Modal -->
 	<div class="modal fade" id="propertyRemove" tabindex="-1" role="dialog"
 		aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -214,39 +218,43 @@
 		</div>
 	</div>
 
-<!-- Footer -->
+	<!-- Footer -->
 
-<div class="home-footer">
-    <div class="home-wrapper">
-        <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
-                <div class="osLight footer-header">Real Estate Information</div>
-                <ul class="footer-nav pb20">
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Team</a></li>
-                    <li><a href="#">Terms & Privacy</a></li>
-                </ul>
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
-                <div class="osLight footer-header">Get in Touch: Dipesh Walia</div>
-                <ul class="footer-nav pb20">
-                    <li class="footer-phone"><span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> 438 402 52 02</li>
-                    <li class="footer-address osLight">
-                        <p>7141 Sherbrooke Street West</p>
-                        <p>Montreal, Quebec H4B 1R6</p>
-                        <p>Canada</p>
-                    </li>
-                </ul>
-            </div>
-            
-        </div>
-        <div class="copyright">iWebEstate Real estate Online application<br> &copy; CoolBreeze 2015</div>
-    </div>
-</div>
-	
+	<div class="home-footer">
+		<div class="home-wrapper">
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
+					<div class="osLight footer-header">Real Estate Information</div>
+					<ul class="footer-nav pb20">
+						<li><a href='<spring:url value="/about.html"/>'>About</a></li>
+						<li><a href='<spring:url value="/team.html"/>'>Team</a></li>
+						<li><a href='<spring:url value="/terms.html"/>'>Terms &
+								Privacy</a></li>
+					</ul>
+				</div>
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3"></div>
+				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+					<div class="osLight footer-header">Get in Touch: Dipesh Walia</div>
+					<ul class="footer-nav pb20">
+						<li class="footer-phone"><span
+							class="glyphicon glyphicon-earphone" aria-hidden="true"></span>
+							438 402 52 02</li>
+						<li class="footer-address osLight">
+							<p>7141 Sherbrooke Street West</p>
+							<p>Montreal, Quebec H4B 1R6</p>
+							<p>Canada</p>
+						</li>
+					</ul>
+				</div>
+
+			</div>
+			<div class="copyright">
+				iWebEstate Real estate Online application<br> &copy; CoolBreeze
+				2015
+			</div>
+		</div>
+	</div>
+
 	<script src="js/jquery-2.1.1.min.js"></script>
 	<script src="js/jquery-ui.min.js"></script>
 	<script src="js/jquery-ui-touch-punch.js"></script>
@@ -254,7 +262,8 @@
 	<script src="js/jquery.placeholder.js"></script>
 	<script src="js/bootstrap.js"></script>
 	<script src="js/jquery.touchSwipe.min.js"></script>
-	<script src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=geometry&amp;libraries=places"
+	<script
+		src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=geometry&amp;libraries=places"
 		type="text/javascript"></script>
 	<script src="js/infobox.js"></script>
 	<script src="js/jquery.visible.js"></script>

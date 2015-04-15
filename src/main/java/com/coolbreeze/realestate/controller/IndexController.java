@@ -223,4 +223,19 @@ public class IndexController {
 //	}
 
 
+	@RequestMapping("/about")
+	public String about(){
+		return "about";
+	}
+	
+	@RequestMapping("/team")
+	public String team(){
+		return "team";
+	}
+	
+	@RequestMapping("/terms")
+	public String terms(){
+		return "terms";
+	}
+	
 }

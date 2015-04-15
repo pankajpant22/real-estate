@@ -246,9 +246,9 @@ $(document).ready(function() {
 				<div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
 					<div class="osLight footer-header">Real Estate Information</div>
 					<ul class="footer-nav pb20">
-						<li><a href="#">About</a></li>
-						<li><a href="#">Team</a></li>
-						<li><a href="#">Terms & Privacy</a></li>
+						<li><a href='<spring:url value="/about.html"/>'>About</a></li>
+						<li><a href='<spring:url value="/team.html"/>'>Team</a></li>
+						<li><a href='<spring:url value="/terms.html"/>'>Terms & Privacy</a></li>
 					</ul>
 				</div>
 				<div class="col-xs-12 col-sm-6 col-md-3 col-lg-3"></div>

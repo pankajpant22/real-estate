@@ -38,35 +38,73 @@
 <!-- Optional theme -->
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
-<link rel="stylesheet" media="all" type="text/css"
-	href="http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css" />
 
-<link rel="stylesheet" media="all" type="text/css"
-	href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.7.14/css/bootstrap-datetimepicker.min.css
-" />
+<!-- Latest compiled and minified JavaScript -->
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
-
-
+<script src="js/jquery-2.1.1.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/jquery-ui-touch-punch.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/jquery.placeholder.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/jquery.touchSwipe.min.js"></script>
+<script
+	src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=geometry&amp;libraries=places"
+	type="text/javascript"></script>
+<script src="js/infobox.js"></script>
+<script src="js/jquery.visible.js"></script>
+<script src="js/home.js" type="text/javascript"></script>
 
 <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+<style>
+.form-signin {
+	max-width: 330px;
+	padding: 15px;
+	margin: 0 auto;
+}
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		$("#dtBox").DateTimePicker();
+.form-signin .form-signin-heading, .form-signin .checkbox {
+	margin-bottom: 10px;
+}
 
-		$('.updateProperty').validate({
-			rules : {
-				userSold : {
-					required : true
-				}
-			}
-		});
-	});
-</script>
+.form-signin .checkbox {
+	font-weight: normal;
+}
+
+.form-signin .form-control {
+	position: relative;
+	height: auto;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 10px;
+	font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+	z-index: 2;
+}
+
+.form-signin input[type="email"] {
+	margin-bottom: -1px;
+	border-bottom-right-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+	margin-bottom: 10px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+</style>
+
+
 </head>
 <body class="notransition no-hidden">
 
@@ -81,8 +119,6 @@
 				class="fa fa-bars"></span></a>
 			<div class="home-nav">
 				<ul>
-					<li style="font-size: 200%; color: red;">Welcome ${name}</li>
-
 					<li><a href='<spring:url value="/"/>'
 						class="btn btn-green isThemeBtn">Home</a></li>
 					<security:authorize access="hasRole('ROLE_ADMIN')">
@@ -114,71 +150,8 @@
 
 	<div class="home-wrapper">
 		<br> <br>
-		<h2>Update Property</h2>
-		<span style="color: green; font-weight: bold;">${message}</span>
-
-		<hr>
-		<!--Start Contact form -->
-		<form class="form-horizontal updateProperty" method="post">
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Property Name</label>
-				<div class="col-sm-10">
-					<p class="form-control-static">${property.name}</p>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Property Address</label>
-				<div class="col-sm-10">
-					<p class="form-control-static">${property.address}</p>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Message Recieved</label>
-				<div class="col-sm-10">
-					<p class="form-control-static">${property.message}</p>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Sold</label>
-				<div class="col-sm-offset-2 col-sm-10">
-					<div class="checkbox">
-						<c:choose>
-							<c:when test="${property.sold == 1}">
-								<label> <input name="sold" value="1" type="checkbox" checked>Sold</label> 
-								<label> <input name="sold" value="0" type="checkbox">Not Sold</label>	
-      						</c:when>
-							<c:otherwise>
-								<label> <input name="sold" value="1" type="checkbox">Sold</label> 
-								<label> <input name="sold" value="0" type="checkbox" checked>Not Sold</label>	
-      						</c:otherwise>
-						</c:choose>
-						
-					</div>
-				</div>
-
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Date Sold</label>
-				<div class="col-sm-10">
-					<input type="text" name="dateSold" data-field="datetime"
-						placeholder="Date Sold" value="${property.dateSold}" readonly>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-sm-2 control-label">Sold to (User Name)</label>
-				<div class="col-sm-10">
-					<input type="text" name="userSold" placeholder="Sold to User" >
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-offset-2 col-sm-10">
-					<input type="submit" class="btn btn-default" value="Update" />
-				</div>
-			</div>
-			<div id="dtBox"></div>
-
-		</form>
-
+		
+		About Us
 
 	</div>
 
@@ -218,35 +191,7 @@
 		</div>
 	</div>
 
-	<!-- Latest compiled and minified JavaScript -->
-
-	<script src="js/jquery-2.1.1.min.js"></script>
-	<script src="js/jquery-ui.min.js"></script>
-	<script src="js/jquery-ui-touch-punch.js"></script>
-	<script src="js/jquery.cookie.js"></script>
-	<script src="js/jquery.placeholder.js"></script>
-	<script src="js/bootstrap.js"></script>
-	<script src="js/jquery.touchSwipe.min.js"></script>
-	<script
-		src="http://maps.googleapis.com/maps/api/js?sensor=true&amp;libraries=geometry&amp;libraries=places"
-		type="text/javascript"></script>
-	<script src="js/infobox.js"></script>
-	<script src="js/jquery.visible.js"></script>
-	<script src="js/home.js" type="text/javascript"></script>
-	<link rel="stylesheet" type="text/css" href="css/DateTimePicker.css" />
-	<script type="text/javascript" src="js/DateTimePicker.js"></script>
-
-
-	<script type="text/javascript"
-		src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.13.1/jquery.validate.min.js"></script>
-<script type="text/javascript">
-		$(document).ready(function() {
-			$('.checkbox input').on('change', function() {
-				$('.checkbox input').not(this).prop('checked', false);
-			});
-
-		});
-	</script>
-
 </body>
 </html>
+
+

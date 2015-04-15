@@ -264,7 +264,7 @@ public class PropertyDaoImpl implements PropertyDao {
 	@Override
 	public void deactivateOffer(int id) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createSQLQuery("UPDATE Property SET offer = 0,  WHERE id =:id ");
+		Query query = session.createSQLQuery("UPDATE Property SET offer = 0 WHERE id =:id ");
 		query.setParameter("id", id);
 		int result = query.executeUpdate();
 	}
