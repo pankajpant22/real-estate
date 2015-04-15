@@ -76,6 +76,8 @@ public class UserController {
 	@RequestMapping("/account")
 	public String account(Model model, Principal principal ){
 		String name = principal.getName();
+		String Uname = name.substring(0, 1).toUpperCase() + name.substring(1);
+		model.addAttribute("name", Uname);
 		model.addAttribute("user", userService.findOneWithProperty(name));
 		return "users";
 	}
@@ -104,6 +106,26 @@ public class UserController {
 	{	
 		propertyService.delete(id);
 		return "redirect:/account.html";
+	}
+	
+	
+	@RequestMapping("/updateProfile")
+	public String updateProfile(Model model, Principal principal ){
+		String name = principal.getName();
+		model.addAttribute("user", userService.findOne(name));
+		return "update-user";
+	}
+	
+	@RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
+	public String updateProfileUser(HttpServletRequest request,Model model, 
+			Principal principal,final RedirectAttributes redirectAttributes ){
+		String name = principal.getName();
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		userService.updateUserSetting(name,email,password);
+		
+		redirectAttributes.addFlashAttribute("message", "Settings Updated !!!");
+		return "redirect:/updateProfile.html";
 	}
 	
 }

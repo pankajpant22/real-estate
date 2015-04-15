@@ -2,6 +2,7 @@ package com.coolbreeze.realestate.dao;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -102,9 +103,16 @@ public class PropertyDaoImpl implements PropertyDao {
 	@Override
 	public void addMessage(int id, String message) {
 		Session session = this.sessionFactory.getCurrentSession();
-		Query query = session.createSQLQuery("UPDATE Property SET message = :message WHERE id =:id ");
+		DateFormat dateFormat = new SimpleDateFormat(
+				"yyyy-MM-dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance();
+		String current = dateFormat.format(cal.getTime());
+		
+		Query query = session.createSQLQuery("UPDATE Property SET message = :message, offer = 1,dateOffer = CAST(:dateOffer AS datetime) "
+				+ " WHERE id =:id ");
 		query.setParameter("id", id);
 		query.setParameter("message", message);
+		query.setParameter("dateOffer", current);
 		int result = query.executeUpdate();
 	}
 
@@ -184,7 +192,7 @@ public class PropertyDaoImpl implements PropertyDao {
 	public void updateProperty(int id, int s, String dateSold, int userSoldId) {
 		Session session = this.sessionFactory.getCurrentSession();
 		Query query = session.createSQLQuery("UPDATE Property "
-				+ "SET sold = :sold,dateSold = CAST(:dateSold AS datetime), user_id=:userSoldId"
+				+ "SET sold = :sold,dateSold = CAST(:dateSold AS datetime), user_id=:userSoldId, offer = 0"
 				+ " WHERE id =:id ");
 		query.setParameter("id", id);
 		query.setParameter("sold", s);
@@ -251,6 +259,14 @@ public class PropertyDaoImpl implements PropertyDao {
 		query.setParameter("properties", testFinal);	
 		List<Property> propertyList = query.list();
 		return propertyList;
+	}
+
+	@Override
+	public void deactivateOffer(int id) {
+		Session session = this.sessionFactory.getCurrentSession();
+		Query query = session.createSQLQuery("UPDATE Property SET offer = 0,  WHERE id =:id ");
+		query.setParameter("id", id);
+		int result = query.executeUpdate();
 	}
 	
 }

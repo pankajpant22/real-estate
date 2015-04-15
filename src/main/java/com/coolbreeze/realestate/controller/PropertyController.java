@@ -67,9 +67,6 @@ public class PropertyController {
 			final RedirectAttributes redirectAttributes){
 		String name = principal.getName();
 		Property property = propertyService.find(id);
-		model.addAttribute("property", propertyService.find(id));
-		model.addAttribute("user", userService.findOne(property.getUser()));
-		model.addAttribute("name", name);
 		String email = request.getParameter("email");
 		String seller_email = request.getParameter("seller_email");
 		String msg = request.getParameter("msg");
@@ -80,6 +77,10 @@ public class PropertyController {
 		mailService.sendMail(seller_email, "Regarding Your Property", "You received a new"
 				+ "Message: "+message+ " , Please Check Your Account");
         
+		
+		model.addAttribute("property", propertyService.find(id));
+		model.addAttribute("user", userService.findOne(property.getUser()));
+		model.addAttribute("name", name);
 		redirectAttributes.addFlashAttribute("message", "Send Message to Seller !!!");
 		return "redirect:/property/contactAgent/{id}.html";
 	}
@@ -106,6 +107,13 @@ public class PropertyController {
 		String userSold=request.getParameter("userSold");
 		
 		User user=userService.findOne(userSold);
+		
+		if(user == null)
+		{
+			redirectAttributes.addFlashAttribute("message", "User Not Valid!!!");
+			return "redirect:/property/update/{id}.html";
+		}
+		
 		int userSoldId = user.getUserId();
 		
 		String dateSold = request.getParameter("dateSold");

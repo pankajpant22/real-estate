@@ -6,6 +6,7 @@ import java.util.List;
 
 
 
+
 //import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -92,6 +93,11 @@ public class UserService {
 	@Transactional
 	public boolean updateUser(String email, String randomNum) {
 		return userDao.updateUser(email,randomNum);
+	}
+
+	@Transactional
+	public void updateUserSetting(String name, String email, String password) {
+		userDao.updateUserSetting(name,email,password);
 	}
 
 	

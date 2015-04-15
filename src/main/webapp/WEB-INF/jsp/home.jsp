@@ -194,6 +194,9 @@
 									<c:when test="${property.sold == 1}">
 									<img id ="soldImage" src="images/sold/${property.id}-1.png" alt="${property.name}">
 									</c:when>
+									<c:when test="${property.offer == 1}">
+									<img id ="offerImage" src="images/offer/${property.id}-1.png" alt="${property.name}">
+									</c:when>
 									<c:otherwise>
 									<img src="images/prop/${property.id}-1.png" alt="${property.name}">
 									<img class="blur" src="images/prop/${property.id}-1.png" alt="${property.name}">

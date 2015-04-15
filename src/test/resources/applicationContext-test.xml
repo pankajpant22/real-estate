@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+		>
+
+	<global-method-security pre-post-annotations="enabled" />
+
+	<http use-expressions="true">
+		<intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/users/**" access="hasRole('ROLE_ADMIN')" />
+		<intercept-url pattern="/account**"
+			access="hasAnyRole('ROLE_BUYER', 'ROLE_SELLER')" />
+		<intercept-url pattern="/property/contactAgent/**"
+			access="hasAnyRole('ROLE_BUYER', 'ROLE_SELLER')" />
+		<form-login login-page="/login.html" />
+		<logout logout-url="/logout" />
+	</http>
+
+	<!-- <authentication-manager> <authentication-provider> <user-service> <user 
+		name="pankaj" password = "pankaj" authorities="ROLE_ADMIN"/> </user-service> 
+		</authentication-provider> </authentication-manager> -->
+	<authentication-manager>
+		<authentication-provider>
+
+			<password-encoder hash="bcrypt"/> 
+
+			<!--<user-service> -->
+			<!--<user name='admin' password='secret' authorities='ROLE_ADMIN,ROLE_USER' 
+				/> -->
+			<!--<user name='user1' password='1111' authorities='ROLE_USER' /> -->
+			<!--</user-service> -->
+			<jdbc-user-service data-source-ref='dataSource'
+				users-by-username-query="select userName,password, enabled from User where userName=? AND enabled = 1"
+				authorities-by-username-query='select u.userName , r.name as authorities from User u 
+           join User_Role ur on ur.users_userId = u.userId
+           join Role r on ur.roles_id=r.id 
+           where u.userName = ?' />
+		</authentication-provider>
+	</authentication-manager>
+
+	<context:component-scan base-package="com.coolbreeze.realestate">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+
+
+</beans:beans>

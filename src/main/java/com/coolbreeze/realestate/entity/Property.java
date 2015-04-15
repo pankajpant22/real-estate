@@ -51,6 +51,10 @@ public class Property implements Serializable {
 	
 	private int active;
 	
+	private int offer;
+	
+	private Date dateOffer;
+	
 	@Column(name = "published_date")
 	private Date publishedDate;
 	
@@ -67,6 +71,22 @@ public class Property implements Serializable {
 	}
 
 					
+	public int getOffer() {
+		return offer;
+	}
+
+	public void setOffer(int offer) {
+		this.offer = offer;
+	}
+
+	public Date getDateOffer() {
+		return dateOffer;
+	}
+
+	public void setDateOffer(Date dateOffer) {
+		this.dateOffer = dateOffer;
+	}
+
 	public int getActive() {
 		return active;
 	}

@@ -105,4 +105,17 @@ public class UserDaoImpl implements UserDao {
 		}
 	}
 
+	@Override
+	public void updateUserSetting(String name, String email, String password) {
+		Session session = this.sessionFactory.getCurrentSession();
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		String encodePass = encoder.encode(password);
+		Query query = session.createQuery("update User set password = :password,email = :email" +
+				" where userName = :name");
+		query.setParameter("password", encodePass);
+		query.setParameter("email", email);
+		query.setParameter("name", name);
+		int result = query.executeUpdate();
+	}
+
 }

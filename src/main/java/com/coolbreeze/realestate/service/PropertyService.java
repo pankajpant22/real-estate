@@ -113,8 +113,14 @@ public class PropertyService {
 		return propertyDao.searchPropertySort(sort,properties);
 	}
 
+	@Transactional
 	public List<Property> findByUserId(int userId) {
 		return propertyDao.findByUserId(userId);
+	}
+
+	@Transactional
+	public void deactivateOffer(int id) {
+		propertyDao.deactivateOffer(id);
 	}
 
 	

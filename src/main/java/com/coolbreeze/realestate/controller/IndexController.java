@@ -52,6 +52,7 @@ public class IndexController {
 			Model model,
 			@RequestParam(value = "page", defaultValue = "0", required = false) int page) {
 
+		Boolean offered = null;
 		List<Property> propertyList = propertyService.findAll(page);
 		Iterator<Property> iterator = propertyList.iterator();
 		while (iterator.hasNext()) {
@@ -76,7 +77,7 @@ public class IndexController {
 					int days = Days.daysBetween(dt1, dt2).getDays();
 					// System.out.println(days+"days");
 
-					if (days <= -3) {
+					if (days <= -15) {
 						int id = prop.getId();
 						propertyService.deactivate(id);
 					}
@@ -93,8 +94,36 @@ public class IndexController {
 					e.printStackTrace();
 				}
 			}
-			// if (i.next().getIsbn() == isbn) {
+			
+			if (prop.getOffer() == 1) {
+				DateFormat dateFormat = new SimpleDateFormat(
+						"yyyy-MM-dd HH:mm:ss");
+				Calendar cal = Calendar.getInstance();
+				String current = dateFormat.format(cal.getTime());
+				System.out.println(current);
+				
+				Date d1 = null;
+				Date d2 = null;
+				
+				Date dateOffer = prop.getDateOffer();
+				String date = dateFormat.format(dateOffer);
+				System.out.println(date);
+				try {
+					d1 = dateFormat.parse(current);
+					d2 = dateFormat.parse(date);
+					DateTime dt1 = new DateTime(d1);
+					DateTime dt2 = new DateTime(d2);
+					int days = Days.daysBetween(dt1, dt2).getDays();
+					// System.out.println(days+"days");
 
+					if (days <= -3) {
+						int id = prop.getId();
+						propertyService.deactivateOffer(id);
+					}
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			}
 		}
 
 		// DateTimeFormatter dtf =
@@ -102,7 +131,8 @@ public class IndexController {
 		// DateTime dt = new DateTime();
 		//
 		// System.out.println(dt);
-
+		
+		model.addAttribute("offered", offered);
 		model.addAttribute("propertyList", propertyService.findAll(page));
 		return ("home");
 	}
@@ -161,9 +191,15 @@ public class IndexController {
 		// System.out.println(queryFinal);
 
 		List<Property> propertyList = propertyService.searchPropertyMap(map);
-
+		int count=0;
+		Iterator<Property> it = propertyList.iterator();
+		while(it.hasNext()){
+			Property prop = (Property) it.next();
+			count++;
+		}
+		
 		model.addAttribute("propertyList", propertyList);
-
+		model.addAttribute("count", count);
 		return "search";
 	}
 

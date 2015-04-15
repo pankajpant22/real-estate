@@ -116,6 +116,16 @@
 			</form>
 			-->
 			<h1 class="osLight">Search Result</h1>
+			Number Of Results: 
+			<c:choose>
+				<c:when test="${count == 0}">
+				No Records Found
+				</c:when>
+				<c:otherwise>
+				${count}
+				</c:otherwise>
+			</c:choose>
+			
 			<div class="resultsList">
 
 				<div class="row">

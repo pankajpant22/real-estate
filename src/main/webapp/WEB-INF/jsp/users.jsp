@@ -177,8 +177,8 @@
 
 	<div class="home-wrapper">
 		<br> <br>
-		<h2>${user.userName}Properties Listing
-		<!-- <a href="javascript:void(0);"><img id="settings" alt="settings" src="images/settings-icon.png"></a> --> 
+		<h2>${name} Properties Listing
+		<a href='<spring:url value="/updateProfile.html"/>'><img id="settings" alt="settings" src="images/settings-icon.png"></a>  
 		</h2>
 		<hr>
 		<span style="color: green; font-weight: bold;">${message}</span>
@@ -200,7 +200,9 @@
 					<th>Messages</th>
 					</security:authorize>
 					<th>Sold</th>
+					<security:authorize access="hasRole('ROLE_BUYER')">
 					<th>Date Sold</th>
+					</security:authorize>
 					<security:authorize access="hasRole('ROLE_SELLER')">
 					<th>Action</th>
 					</security:authorize>
@@ -235,7 +237,9 @@
 								<td><img alt="sold" src="images/cross.png"> </td>
 							</c:otherwise>
 						</c:choose>
+						<security:authorize access="hasRole('ROLE_BUYER')">
 						<td>${prop.dateSold}</td>
+						</security:authorize>
 						<security:authorize access="hasRole('ROLE_SELLER')">
 						<td><a
 							href='<spring:url value="/account/property/delete/${prop.id}.html"/>'

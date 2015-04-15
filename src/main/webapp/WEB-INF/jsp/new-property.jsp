@@ -199,7 +199,7 @@ $(document).ready(function() {
 					      <input type="text" name = "price" class="form-control" id="price" placeholder="Price">
 					    </div>
 			</div>
-			Use <a href="http://www.latlong.net/"><u>http://www.latlong.net/</u></a> for Latitude and Longitude
+			Use <a href="http://www.latlong.net/" target="_blank"><u>http://www.latlong.net/</u></a> for Latitude and Longitude
 			<div class="form-group">
 					    <label for="lat" class="col-sm-2 control-label">Latitude</label>
 					    <div class="col-sm-10">
