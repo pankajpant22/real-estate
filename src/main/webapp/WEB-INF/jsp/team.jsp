@@ -151,7 +151,14 @@
 	<div class="home-wrapper">
 		<br> <br>
 		
-		Team 
+		<h1>Team</h1>
+		
+		Dipesh Walia
+		<br>
+		Kamal Cheema
+		<br>
+		Pankaj Kumar Pant
+		 
 
 	</div>
 

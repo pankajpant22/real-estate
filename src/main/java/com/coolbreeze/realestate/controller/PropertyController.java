@@ -148,7 +148,10 @@ public class PropertyController {
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
 		String description = request.getParameter("description");
-		String city = request.getParameter("city");
+		String citytemp = request.getParameter("city");
+		
+		String[] city = citytemp.split(",");
+		
 		String zip = request.getParameter("zip");
 		String bed = request.getParameter("bed");
 		String bath= request.getParameter("bath");
@@ -162,7 +165,7 @@ public class PropertyController {
 		map.put("name", name);
 		map.put("address", address);
 		map.put("description", description);
-		map.put("city", city);
+		map.put("city", city[0]);
 		map.put("zip", zip);
 		map.put("bedroom", bed);
 		map.put("bathroom", bath);

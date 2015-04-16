@@ -219,9 +219,9 @@ public class PropertyDaoImpl implements PropertyDao {
 		String dateFinal = current.replaceAll("[:\\s-]+", "");
 		
 		Query query = session.createSQLQuery("INSERT INTO Property "
-				+ "(address,city,name,price,published_date,zip,user_id,bathroom,bedroom,description,lat,lng,message,sold,dateSold,type,facility) "
+				+ "(address,city,name,price,published_date,zip,user_id,bathroom,bedroom,description,lat,lng,message,sold,dateSold,type,facility,active) "
 				+ "VALUES (:address,:city,:name,:price,CAST(:current AS datetime),:zip,:userId,:bathroom,:bedroom,:description,"
-				+ "CAST(:lat AS DECIMAL(9,6)),CAST(:lng AS DECIMAL(9,6)),NULL,0,NULL,:type,:facility )");
+				+ "CAST(:lat AS DECIMAL(9,6)),CAST(:lng AS DECIMAL(9,6)),NULL,0,NULL,:type,:facility,1 )");
 		query.setParameter("address", map.get("address"));
 		query.setParameter("city", map.get("city"));
 		query.setParameter("name", map.get("name"));
